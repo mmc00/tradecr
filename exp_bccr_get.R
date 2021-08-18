@@ -11,9 +11,9 @@ library(xml2)
 
 base <- "https://gee.bccr.fi.cr/Indicadores/Suscripciones/WS/wsindicadoreseconomicos.asmx/ObtenerIndicadoresEconomicos?"
 qr <- list(
-  Indicador = "468",
+  Indicador = "1993",
   FechaInicio = "01/01/1999",
-  FechaFinal = "21/04/2020",
+  FechaFinal = "21/12/2021",
   Nombre = "Marlon",
   Subniveles = "S",
   CorreoElectronico = "marlonmolina00@hotmail.com",
