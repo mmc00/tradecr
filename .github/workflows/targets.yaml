@@ -24,6 +24,8 @@
 # SOFTWARE.
 
 on:
+  schedule:
+    - cron: "0 * * * *"
   push:
     branches:
       - main
@@ -31,10 +33,6 @@ on:
 
 name: targets
 
-on:
-  schedule:
-    - cron: "0 * * * *"
-    
 jobs:
   targets:
     runs-on: ubuntu-latest
