@@ -27,8 +27,8 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
     stringr::str_replace_all(pattern = "\\.",
                              replacement = "\\\\.") %>%
     paste0("^",  .) %>%
-    stringr::str_subset(string = dplyr::last(versions)) %>%
-    as.numeric_version() %>%
+    # stringr::str_subset(string = dplyr::last(versions)) %>%
+    # as.numeric_version() %>%
     max() %>%
     as.character()
     
