@@ -4,6 +4,8 @@ server_call|stem|b34b55d7262e6035|3035ec551873055b|8310448c463fb945|1035387578||
 dict_link|stem|4406cf07acd66e3a|a3d9303ef42a7902|00e2fde107168caa|-1521878233||t18856.6909451382s|6080d84c6b19ae8b|167|rds|vector|||0.13||
 file_dict|stem|bc574c09ce9660f6|88d10315c78e0aa0|d86f339cd85d25f8|-1324153504||t18856.7018879883s|3454820de347cd26|76|rds|vector|||2.99||
 sicomex_dict|stem|a6ddd81e6a8d359e|194de115a5ea10c5|d82bafba0be433ad|-1918062333||t18857.7061577573s|4bc55535e97af704|3215|rds|vector|||1.48||
+dict_etag|stem|1dcba8a366290ebb|a2156717801dfd33|6597bb52f702f479|-1624634578||t18858.1390948082s|76f81f19df583737|95|rds|vector|||2.7||
+temp_country|stem|cf74e2dba4feb33a|cfa31c07d5241640|b6b129a53106b7d8|117506238||t18858.1395272204s|52cc7fbe0ecad347|93|rds|vector|||37.29||
 get_etag|function|2da2d8a7be92e85b||||||||||||||
 cleanig_data_country|function|9f547544802a158c||||||||||||||
 reading_dict|function|c3a1780ac726f823||||||||||||||
@@ -13,6 +15,4 @@ activate_sharepoint_site|function|0c88cfc132bffff8||||||||||||||
 getChromeDriverVersion|function|636435f675ccbb2e||||||||||||||
 effective_download|function|adf84ffa7b4a5718||||||||||||||
 procomer_country|function|883abe12148782fd||||||||||||||
-chrome_version|stem|040830323f230bc3|34484c90f409eeeb|6f464aec9be54693|1984679654||t18858.1390625447s|9e0babf6e6ead64d|66|rds|vector|||6.64||
-dict_etag|stem|1dcba8a366290ebb|a2156717801dfd33|6597bb52f702f479|-1624634578||t18858.1390948082s|76f81f19df583737|95|rds|vector|||2.7||
-temp_country|stem|cf74e2dba4feb33a|cfa31c07d5241640|b6b129a53106b7d8|117506238||t18858.1395272204s|52cc7fbe0ecad347|93|rds|vector|||37.29||
+chrome_version|stem|040830323f230bc3|34484c90f409eeeb|6f464aec9be54693|1984679654||t18858.1570110851s|9e0babf6e6ead64d|66|rds|vector|||9.51||

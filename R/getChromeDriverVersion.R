@@ -32,35 +32,4 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
     max() %>%
     as.character()
     
-}  
-# 
-# rsStuff <- local({
-#   rD <- NULL
-#   driver <- function(port = 4567L, force = FALSE, verbose = FALSE) {
-#     if (force)
-#       rD <<- NULL
-#     if (!is.null(rD))
-#       return(rD)
-#     versions <- binman::list_versions("chromedriver")
-#     versions <- c(versions$mac64, getChromeDriverVersion(versions))
-#     v <- length(versions) + 1
-#     while (v && (is.null(rD) || inherits(rD, "condition"))) {
-#       v <- v - 1  # Try each value
-#       rD <<- tryCatch(rsDriver(verbose = verbose, 
-#                                port = port + sample(0:1000, 1), 
-#                                chromever=versions[v],
-#                                geckover = NULL, 
-#                                extraCapabilities = eCaps,
-#                                phantomver = NULL), error = function(e) e,
-#                                message = function(m) m)
-#     }
-#     rD
-#   }
-#   kill <- function() {
-#     try(rD$server$stop())
-#     rD <<- NULL
-#   }
-#   # list(driver = driver, kill = kill)
-#   versions[v]
-# })  
-# getrsDriver <- rsStuff$driver
+}
