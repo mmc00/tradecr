@@ -1,4 +1,4 @@
-procomer_country <- function(url, download_path_var) {
+procomer_country <- function(url, download_path_var, version_driver) {
 
   ## folder
   eCaps <- list(
@@ -9,14 +9,15 @@ procomer_country <- function(url, download_path_var) {
   )
 
   ## Version of chrome driver
-  vers <- binman::list_versions("chromedriver") %>%
-    unname() %>%
-    unlist()
-  drivern <- length(vers) - 1
+  # vers <- binman::list_versions("chromedriver") %>%
+  #   unname() %>%
+  #   unlist()
+  # drivern <- length(vers) - 1
 
   ## set driver
   driver <- RSelenium::rsDriver(
-    chromever = vers[drivern],
+    # chromever = vers[drivern],
+    chromever = version_driver,
     port = 4562L, extraCapabilities = eCaps
   )
 

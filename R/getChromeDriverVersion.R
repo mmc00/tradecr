@@ -1,0 +1,66 @@
+getChromeDriverVersion <- function(versions = binman::list_versions("chromedriver")) {
+  if ( xfun::is_unix() ) {
+    chrome_driver_version <-
+      system2(command = ifelse(xfun::is_macos(),
+                               "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                               "google-chrome-stable"),
+              args = "--version",
+              stdout = TRUE,
+              stderr = TRUE) %>%
+      stringr::str_extract(pattern = "(?<=Chrome )(\\d+\\.){3}")
+    
+    ## on Windows a plattform-specific bug prevents us from calling the Google Chrome binary directly to get its version number
+    ## cf. https://bugs.chromium.org/p/chromium/issues/detail?id=158372
+  } else if ( xfun::is_windows() ) {
+    chrome_driver_version <-
+      system2(command = "wmic",
+              args = 'datafile where name="C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe" get Version /value',
+              stdout = TRUE,
+              stderr = TRUE) %>%
+      stringr::str_extract(pattern = "(?<=Version=)(\\d+\\.){3}")
+    
+  } else {rlang::abort(message = "Your OS couldn't be determined (Linux, macOS, Windows) or is not supported!")}
+
+  # ... and determine most recent ChromeDriver version matching it
+  chrome_driver_version %>%
+    magrittr::extract(!is.na(.)) %>%
+    stringr::str_replace_all(pattern = "\\.",
+                             replacement = "\\\\.") %>%
+    paste0("^",  .) %>%
+    stringr::str_subset(string = dplyr::last(versions)) %>%
+    as.numeric_version() %>%
+    max() %>%
+    as.character()
+    
+}  
+# 
+# rsStuff <- local({
+#   rD <- NULL
+#   driver <- function(port = 4567L, force = FALSE, verbose = FALSE) {
+#     if (force)
+#       rD <<- NULL
+#     if (!is.null(rD))
+#       return(rD)
+#     versions <- binman::list_versions("chromedriver")
+#     versions <- c(versions$mac64, getChromeDriverVersion(versions))
+#     v <- length(versions) + 1
+#     while (v && (is.null(rD) || inherits(rD, "condition"))) {
+#       v <- v - 1  # Try each value
+#       rD <<- tryCatch(rsDriver(verbose = verbose, 
+#                                port = port + sample(0:1000, 1), 
+#                                chromever=versions[v],
+#                                geckover = NULL, 
+#                                extraCapabilities = eCaps,
+#                                phantomver = NULL), error = function(e) e,
+#                                message = function(m) m)
+#     }
+#     rD
+#   }
+#   kill <- function() {
+#     try(rD$server$stop())
+#     rD <<- NULL
+#   }
+#   # list(driver = driver, kill = kill)
+#   versions[v]
+# })  
+# getrsDriver <- rsStuff$driver

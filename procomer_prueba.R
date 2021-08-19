@@ -16,21 +16,24 @@ eCaps <- list(
     ))
 )
 ## Version of chrome driver
-vers <- binman::list_versions("chromedriver") %>%
-  unname() %>%
-  unlist()
-drivern <- length(vers) - 1
+# vers <- binman::list_versions("chromedriver") %>%
+#   unname() %>%
+#   unlist()
+# drivern <- length(vers) - 1
 # set driver
+verso <- getChromeDriverVersion()
 driver <- RSelenium::rsDriver(
-    chromever = vers[drivern],
-    port = 4562L, extraCapabilities = eCaps
+  browser = "chrome",
+  # chromever = "latest_compatible",
+  # chromever = vers[drivern],
+  chromever = verso,
+  port = 4562L, extraCapabilities = eCaps
 )
   
 ## set client
 remote_driver <- driver[["client"]]
 remote_driver$open()
 remote_driver$navigate(url)
-
 ## click
 ### Region
 address_element <-

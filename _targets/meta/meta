@@ -10,7 +10,9 @@ reading_dict|function|c3a1780ac726f823||||||||||||||
 download_xls|function|03aad501cda8051d||||||||||||||
 download_path|object|8d3410b5c0d89406||||||||||||||
 activate_sharepoint_site|function|0c88cfc132bffff8||||||||||||||
+getChromeDriverVersion|function|636435f675ccbb2e||||||||||||||
 effective_download|function|adf84ffa7b4a5718||||||||||||||
-procomer_country|function|323bcbfdb5954adf||||||||||||||
-dict_etag|stem|1dcba8a366290ebb|a2156717801dfd33|6597bb52f702f479|-1624634578||t18857.7088606312s|76f81f19df583737|95|rds|vector|||4.52||
-temp_country|stem|cf74e2dba4feb33a|ce0dc86d29dee1f0|569989d64f7b07d4|117506238||t18857.7092389286s|52cc7fbe0ecad347|93|rds|vector|||32.67||
+procomer_country|function|883abe12148782fd||||||||||||||
+chrome_version|stem|040830323f230bc3|34484c90f409eeeb|6f464aec9be54693|1984679654||t18858.1390625447s|9e0babf6e6ead64d|66|rds|vector|||6.64||
+dict_etag|stem|1dcba8a366290ebb|a2156717801dfd33|6597bb52f702f479|-1624634578||t18858.1390948082s|76f81f19df583737|95|rds|vector|||2.7||
+temp_country|stem|cf74e2dba4feb33a|cfa31c07d5241640|b6b129a53106b7d8|117506238||t18858.1395272204s|52cc7fbe0ecad347|93|rds|vector|||37.29||

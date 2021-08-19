@@ -21,10 +21,17 @@ list(
     exports_link,
     "http://sistemas.procomer.go.cr/estadisticas/inicio.aspx"
   ),
+  ## getting chrome version
+  tar_target(
+    chrome_version,
+    getChromeDriverVersion(),
+    cue = tar_cue_force(TRUE)
+  ),
   ## temporal data by country
   tar_target(
     temp_country,
-    procomer_country(exports_link, download_path),
+    procomer_country(exports_link, download_path,
+                     chrome_version),
     cue = tar_cue_force(TRUE)
   ),
   ## creating server
