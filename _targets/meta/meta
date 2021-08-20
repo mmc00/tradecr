@@ -4,15 +4,18 @@ server_call|stem|b34b55d7262e6035|3035ec551873055b|8310448c463fb945|1035387578||
 dict_link|stem|4406cf07acd66e3a|a3d9303ef42a7902|00e2fde107168caa|-1521878233||t18856.6909451382s|6080d84c6b19ae8b|167|rds|vector|||0.13||
 file_dict|stem|bc574c09ce9660f6|88d10315c78e0aa0|d86f339cd85d25f8|-1324153504||t18856.7018879883s|3454820de347cd26|76|rds|vector|||2.99||
 sicomex_dict|stem|a6ddd81e6a8d359e|194de115a5ea10c5|d82bafba0be433ad|-1918062333||t18857.7061577573s|4bc55535e97af704|3215|rds|vector|||1.48||
-dict_etag|stem|1dcba8a366290ebb|a2156717801dfd33|6597bb52f702f479|-1624634578||t18858.1390948082s|76f81f19df583737|95|rds|vector|||2.7||
-temp_country|stem|cf74e2dba4feb33a|cfa31c07d5241640|b6b129a53106b7d8|117506238||t18858.1395272204s|52cc7fbe0ecad347|93|rds|vector|||37.29||
+cleaning_temp|stem|f2bc1a14f445dbb7|e2e5b5eff0af1f27|6552761050dd1090|-404773375||t18858.9860452794s|2280291f19f9eba1|47|rds|vector|||5.96||
+dict_etag|stem|1dcba8a366290ebb|a2156717801dfd33|6597bb52f702f479|-1624634578||t18858.9861077729s|76f81f19df583737|95|rds|vector|||3.69||
+temp_country|stem|cf74e2dba4feb33a|cfa31c07d5241640|69d0d56ddb99e24a|117506238||t18858.1395272204s||93|rds|vector|||1.72||version requested doesnt match versions available  85.0.4183.38,85.0.4183.83,85.0.4183.87,86.0.4240.22,87.0.4280.20,87.0.4280.88,88.0.4324.27,88.0.4324.96,89.0.4389.23,90.0.4430.24,91.0.4472.101,91.0.4472.19,92.0.4515.107,93.0.4577.15
 get_etag|function|2da2d8a7be92e85b||||||||||||||
 cleanig_data_country|function|9f547544802a158c||||||||||||||
+temp_path|object|97ec86dfa19b5a14||||||||||||||
 reading_dict|function|c3a1780ac726f823||||||||||||||
 download_xls|function|03aad501cda8051d||||||||||||||
 download_path|object|8d3410b5c0d89406||||||||||||||
 activate_sharepoint_site|function|0c88cfc132bffff8||||||||||||||
-getChromeDriverVersion|function|25c84d1055bfc388||||||||||||||
+getChromeDriverVersion|function|636435f675ccbb2e||||||||||||||
 effective_download|function|adf84ffa7b4a5718||||||||||||||
 procomer_country|function|883abe12148782fd||||||||||||||
-chrome_version|stem|30a09bd0ad05532d|34484c90f409eeeb|10816e54f8cafcbf|1984679654||t18858.1819367655s|316cc09d68060f29|67|rds|vector|||6||
+driver_number|function|d0218747f530f6a1||||||||||||||
+chrome_version|stem|39dd30f3cde3bba9|d2418f07e7b343e5|29d73084e8057866|1984679654||t18859.0589107427s|2280291f19f9eba1|47|rds|vector|||13.58||
