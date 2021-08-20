@@ -65,10 +65,10 @@ driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
   versions <- binman::list_versions("chromedriver")
   if (is.list(versions) & length(versions) == 0) {
     versions <- getChromeDriverVersion()
+    versions
   } else {
     versions <- c(versions$mac64, getChromeDriverVersion(versions))
-  }
-  v <- length(versions) + 1
+     v <- length(versions) + 1
   while (v && (is.null(rD) || cond_val)) {
     v <- v - 1 # Try each value
     rD <- tryCatch(rsDriver(
@@ -95,5 +95,6 @@ driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
       system("taskkill /im java.exe /f", intern = FALSE, ignore.stdout = FALSE)
     }
   }
-  return(versions[v])
+     versions[v]
+  }
 }
