@@ -7,6 +7,7 @@ sicomex_dict|stem|a6ddd81e6a8d359e|194de115a5ea10c5|d82bafba0be433ad|-1918062333
 cleaning_temp|stem|f2bc1a14f445dbb7|e2e5b5eff0af1f27|6552761050dd1090|-404773375||t18858.9860452794s|2280291f19f9eba1|47|rds|vector|||5.96||
 dict_etag|stem|1dcba8a366290ebb|a2156717801dfd33|6597bb52f702f479|-1624634578||t18858.9861077729s|76f81f19df583737|95|rds|vector|||3.69||
 temp_country|stem|cf74e2dba4feb33a|cfa31c07d5241640|69d0d56ddb99e24a|117506238||t18858.1395272204s||93|rds|vector|||1.72||version requested doesnt match versions available  85.0.4183.38,85.0.4183.83,85.0.4183.87,86.0.4240.22,87.0.4280.20,87.0.4280.88,88.0.4324.27,88.0.4324.96,89.0.4389.23,90.0.4430.24,91.0.4472.101,91.0.4472.19,92.0.4515.107,93.0.4577.15
+.Random.seed|object|46162f6de8edde87||||||||||||||
 get_etag|function|2da2d8a7be92e85b||||||||||||||
 cleanig_data_country|function|9f547544802a158c||||||||||||||
 temp_path|object|97ec86dfa19b5a14||||||||||||||
@@ -14,8 +15,8 @@ reading_dict|function|c3a1780ac726f823||||||||||||||
 download_xls|function|03aad501cda8051d||||||||||||||
 download_path|object|8d3410b5c0d89406||||||||||||||
 activate_sharepoint_site|function|0c88cfc132bffff8||||||||||||||
-getChromeDriverVersion|function|636435f675ccbb2e||||||||||||||
+getChromeDriverVersion|function|1e5fa8614251639a||||||||||||||
 effective_download|function|adf84ffa7b4a5718||||||||||||||
 procomer_country|function|883abe12148782fd||||||||||||||
-driver_number|function|d0218747f530f6a1||||||||||||||
-chrome_version|stem|25285d53060d5aa0|d2418f07e7b343e5|29d73084e8057866|1984679654||t18859.2247883671s|2280291f19f9eba1|47|rds|vector|||17.55||
+driver_number|function|66261071f000161c||||||||||||||
+chrome_version|stem|25285d53060d5aa0|d2418f07e7b343e5|7b181a3cd895146c|1984679654||t18859.8229465173s|2280291f19f9eba1|47|rds|vector|||17.62||
