@@ -24,16 +24,16 @@
 # SOFTWARE.
 
 on:
-  workflow_run:
-    workflows: ["chrome"]
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: ["chrome"]
+  #   types:
+      # - completed
   # schedule:
   #   - cron: "0 * * * *"
-  # push:
-  #   branches:
-  #     - main
-  #     - master
+  push:
+    branches:
+      - main
+      - master
 
 name: targets
 
@@ -44,6 +44,20 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RENV_PATHS_ROOT: ~/.local/share/renv
     steps:
+      - name: calling_chrome
+        run: |
+          CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
+          && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}) \
+          && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_RELEASE/chromedriver_linux64.zip" \
+          && cd /tmp \
+          && unzip chromedriver_linux64.zip \
+          && rm -rf chromedriver_linux64.zip \
+          && sudo mkdir -p ~/.local/share/binman_chromedriver/ \
+          && sudo mv chromedriver ~/.local/share/binman_chromedriver/ \
+          && sudo chmod +x ~/.local/share/binman_chromedriver/ \
+          && chromedriver --version
+        shell: bash
+
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
