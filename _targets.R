@@ -24,9 +24,6 @@ list(
     exports_link,
     "http://sistemas.procomer.go.cr/estadisticas/inicio.aspx"
   ),
-  tar_target(
-    
-  )
   ## getting chrome version
   tar_target(
     chrome_version,
