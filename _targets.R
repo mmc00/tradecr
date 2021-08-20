@@ -11,6 +11,7 @@ tar_option_set(packages = c("tidyverse",
                             "xml2",
                             "XML",
                             "readxl",
+                            "binman",
                             "Microsoft365R")) # add packages here
 # params 
 download_path <- normalizePath(here("temp"))
