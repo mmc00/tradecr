@@ -29,16 +29,17 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
 
   # ... and determine most recent ChromeDriver version matching it
   if (is.list(versions) & length(versions) == 0) {
-    chrome_driver_version %>%
-      magrittr::extract(!is.na(.)) %>%
-      stringr::str_replace_all(
-        pattern = "\\.",
-        replacement = "\\\\."
-      ) %>%
-      paste0("^", .) %>%
-      as.numeric_version() %>%
-      max() %>%
-      as.character()
+    chrome_driver_version
+    # %>%
+      # magrittr::extract(!is.na(.)) %>%
+      # stringr::str_replace_all(
+      #   pattern = "\\.",
+      #   replacement = "\\\\."
+      # ) %>%
+      # paste0("^", .) %>%
+      # # as.numeric_version() %>%
+      # max() %>%
+      # as.character()
   } else {
     chrome_driver_version %>%
       magrittr::extract(!is.na(.)) %>%
