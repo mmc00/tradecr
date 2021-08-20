@@ -24,12 +24,16 @@
 # SOFTWARE.
 
 on:
-  schedule:
-    - cron: "0 * * * *"
-  push:
-    branches:
-      - main
-      - master
+  workflow_run:
+    workflows: ["chrome"]
+    types:
+      - completed
+  # schedule:
+  #   - cron: "0 * * * *"
+  # push:
+  #   branches:
+  #     - main
+  #     - master
 
 name: targets
 
