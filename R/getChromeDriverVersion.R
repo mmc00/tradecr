@@ -70,6 +70,7 @@ driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
     versions <- c(versions$mac64, getChromeDriverVersion(versions))
      v <- length(versions) + 1
   while (v && (is.null(rD) || cond_val)) {
+    rhversion <- versions[v]
     v <- v - 1 # Try each value
     rD <- tryCatch(rsDriver(
       verbose = verbose,
@@ -95,6 +96,6 @@ driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
       system("taskkill /im java.exe /f", intern = FALSE, ignore.stdout = FALSE)
     }
   }
-     versions[v]
+     rhversion
   }
 }

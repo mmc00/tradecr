@@ -12,8 +12,8 @@ tar_option_set(packages = c("tidyverse",
                             "XML",
                             "readxl",
                             "binman",
-                            "Microsoft365R"))
-               # debug = "chrome_version") # add packages here
+                            "Microsoft365R"),
+               debug = "chrome_version") # add packages here
 # params 
 download_path <- normalizePath(here("temp"))
 temp_path <- here("temp")
@@ -30,43 +30,20 @@ list(
     chrome_version,
     driver_number(force = T),
     cue = tar_cue_force(TRUE)
+  ),
+  ## temporal data by country
+  tar_target(
+    temp_country,
+    procomer_country(exports_link, download_path,
+                     chrome_version),
+    cue = tar_cue_force(TRUE)
+  ),
+  ## clening temp folder
+  tar_target(
+    cleaning_temp,
+    file.remove(list.files(temp_path, full.names = T)),
+    cue = tar_cue_force(TRUE)
   )
-  # ## temporal data by country
-  # tar_target(
-  #   temp_country,
-  #   procomer_country(exports_link, download_path,
-  #                    chrome_version),
-  #   cue = tar_cue_force(TRUE)
-  # ),
-  # ## creating server
-  # tar_target(
-  #   server_call,
-  #   activate_sharepoint_site("https://comexcr.sharepoint.com/Monitoreo/")
-  # ),
-  # ## reading path for dict sicomex
-  # tar_target(
-  #   dict_link,
-  #   read_delim("input/sicomex_dict_path_sharepoint.txt",
-  #     escape_backslash = TRUE,
-  #     delim = ","
-  #   ) %>%
-  #     pull(file)
-  # ),
-  # ## checking etag for dict file
-  # tar_target(
-  #   dict_etag,
-  #   get_etag(
-  #     site = server_call,
-  #     path_sharepoint = dict_link
-  #   ),
-  #   cue = tar_cue_force(TRUE)
-  # ),
-  # ## clening temp folder
-  # tar_target(
-  #   cleaning_temp,
-  #   file.remove(list.files(temp_path, full.names = T)),
-  #   cue = tar_cue_force(TRUE)
-  # ),
   # ## download the file
   # tar_target(
   #   file_dict,
