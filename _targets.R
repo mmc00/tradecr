@@ -13,7 +13,7 @@ tar_option_set(packages = c("tidyverse",
                             "readxl",
                             "binman",
                             "Microsoft365R"),
-               debug = "chrome_version") # add packages here
+               # debug = "chrome_version") # add packages here
 # params 
 download_path <- normalizePath(here("temp"))
 temp_path <- here("temp")
