@@ -11,9 +11,11 @@ tar_option_set(packages = c("tidyverse",
                             "xml2",
                             "XML",
                             "readxl",
+                            "binman",
                             "Microsoft365R")) # add packages here
 # params 
 download_path <- normalizePath(here("temp"))
+temp_path <- here("temp")
 # flow
 list(
   # enlace para Exportaciones
@@ -24,7 +26,7 @@ list(
   ## getting chrome version
   tar_target(
     chrome_version,
-    getChromeDriverVersion(),
+    driver_number(force = T),
     cue = tar_cue_force(TRUE)
   )
   # ## temporal data by country
@@ -55,6 +57,12 @@ list(
   #     site = server_call,
   #     path_sharepoint = dict_link
   #   ),
+  #   cue = tar_cue_force(TRUE)
+  # ),
+  # ## clening temp folder
+  # tar_target(
+  #   cleaning_temp,
+  #   file.remove(list.files(temp_path, full.names = T)),
   #   cue = tar_cue_force(TRUE)
   # ),
   # ## download the file
