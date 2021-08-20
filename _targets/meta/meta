@@ -18,4 +18,4 @@ getChromeDriverVersion|function|636435f675ccbb2e||||||||||||||
 effective_download|function|adf84ffa7b4a5718||||||||||||||
 procomer_country|function|883abe12148782fd||||||||||||||
 driver_number|function|d0218747f530f6a1||||||||||||||
-chrome_version|stem|39dd30f3cde3bba9|d2418f07e7b343e5|29d73084e8057866|1984679654||t18859.0589107427s|2280291f19f9eba1|47|rds|vector|||13.58||
+chrome_version|stem|25285d53060d5aa0|d2418f07e7b343e5|29d73084e8057866|1984679654||t18859.2247883671s|2280291f19f9eba1|47|rds|vector|||17.55||
