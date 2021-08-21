@@ -54,7 +54,7 @@ jobs:
           && rm -rf chromedriver_linux64.zip \
           && sudo mkdir -p ~/.local/share/binman_chromedriver/ \
           && sudo mv chromedriver ~/.local/share/binman_chromedriver/ \
-          && sudo chmod +xw ~/.local/share/binman_chromedriver/ \
+          && sudo chmod +rwx ~/.local/share/binman_chromedriver/ \
           && chromedriver --version
         shell: bash
 
