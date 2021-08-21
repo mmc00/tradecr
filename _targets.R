@@ -15,7 +15,7 @@ tar_option_set(packages = c(
   "binman",
   "Microsoft365R"
 ))
-# debug = "chrome_version") # add packages here
+# debug = "temp_country") # add packages here
 # params
 download_path <- normalizePath(here("temp"))
 temp_path <- here("temp")
