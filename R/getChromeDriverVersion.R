@@ -28,8 +28,9 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
   }
 
   # ... and determine most recent ChromeDriver version matching it
-  if (is.list(versions) & length(versions) == 0) {
+  if (length(versions) == 0) {
     chrome_driver_version
+    print(chrome_driver_version)
     # %>%
       # magrittr::extract(!is.na(.)) %>%
       # stringr::str_replace_all(
