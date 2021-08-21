@@ -7,13 +7,13 @@ procomer_country <- function(url, download_path_var, version_driver) {
         "download.default_directory" = download_path_var
       ))
   )
-
+  print(eCaps)
   ## Version of chrome driver
   # vers <- binman::list_versions("chromedriver") %>%
   #   unname() %>%
   #   unlist()
   # drivern <- length(vers) - 1
-
+  print(version_driver)
   ## set driver
   driver <- RSelenium::rsDriver(
     # chromever = vers[drivern],
