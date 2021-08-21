@@ -14,6 +14,7 @@ procomer_country <- function(url, download_path_var, version_driver) {
   #   unlist()
   # drivern <- length(vers) - 1
   print(version_driver)
+  print(version_driver)
   ## set driver
   driver <- RSelenium::rsDriver(
     # chromever = vers[drivern],
