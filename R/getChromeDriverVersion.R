@@ -65,6 +65,7 @@ driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
   versions <- binman::list_versions("chromedriver")
   if (is.list(versions) & length(versions) == 0) {
     versions <- getChromeDriverVersion()
+    print(versions)
     return(versions)
   } else {
     versions <- c(versions$mac64, getChromeDriverVersion(versions))
