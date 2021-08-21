@@ -60,7 +60,7 @@ driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
     rD <- NULL
   }
   if (!is.null(rD)) {
-    return(rD)
+    rD
   }
   versions <- binman::list_versions("chromedriver")
   if (is.list(versions) & length(versions) == 0) {
@@ -68,6 +68,7 @@ driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
     print(versions)
     return(versions)
   } else {
+    print("hola")
     versions <- c(versions$mac64, getChromeDriverVersion(versions))
     v <- length(versions) + 1
     while (v && (is.null(rD) || cond_val)) {
