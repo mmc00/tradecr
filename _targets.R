@@ -4,17 +4,19 @@ library(tarchetypes)
 library(here)
 sapply(list.files(here("R"), full.names = T), source)
 options(tidyverse.quiet = TRUE)
-tar_option_set(packages = c("tidyverse",
-                            "RSelenium",
-                            "here",
-                            "httr",
-                            "xml2",
-                            "XML",
-                            "readxl",
-                            "binman",
-                            "Microsoft365R"),
-               # debug = "chrome_version") # add packages here
-# params 
+tar_option_set(packages = c(
+  "tidyverse",
+  "RSelenium",
+  "here",
+  "httr",
+  "xml2",
+  "XML",
+  "readxl",
+  "binman",
+  "Microsoft365R"
+))
+# debug = "chrome_version") # add packages here
+# params
 download_path <- normalizePath(here("temp"))
 temp_path <- here("temp")
 dir.create(temp_path, showWarnings = F)
@@ -34,8 +36,10 @@ list(
   ## temporal data by country
   tar_target(
     temp_country,
-    procomer_country(exports_link, download_path,
-                     chrome_version),
+    procomer_country(
+      exports_link, download_path,
+      chrome_version
+    ),
     cue = tar_cue_force(TRUE)
   ),
   ## clening temp folder
