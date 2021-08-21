@@ -65,37 +65,37 @@ driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
   versions <- binman::list_versions("chromedriver")
   if (is.list(versions) & length(versions) == 0) {
     versions <- getChromeDriverVersion()
-    versions
+    return(versions)
   } else {
     versions <- c(versions$mac64, getChromeDriverVersion(versions))
-     v <- length(versions) + 1
-  while (v && (is.null(rD) || cond_val)) {
-    rhversion <- versions[v]
-    v <- v - 1 # Try each value
-    rD <- tryCatch(rsDriver(
-      verbose = verbose,
-      port = port + sample(0:1000, 1),
-      chromever = versions[v],
-      geckover = NULL,
-      phantomver = NULL
-    ),
-    error = function(e) e,
-    message = function(m) m
-    )
-    cond_val <- inherits(rD, "condition")
-    if (!cond_val) {
-      rD[["server"]]$stop()
-      rD <- NULL
-      try(gc(rD))
+    v <- length(versions) + 1
+    while (v && (is.null(rD) || cond_val)) {
+      rhversion <- versions[v]
+      v <- v - 1 # Try each value
+      rD <- tryCatch(rsDriver(
+        verbose = verbose,
+        port = port + sample(0:1000, 1),
+        chromever = versions[v],
+        geckover = NULL,
+        phantomver = NULL
+      ),
+      error = function(e) e,
+      message = function(m) m
+      )
+      cond_val <- inherits(rD, "condition")
+      if (!cond_val) {
+        rD[["server"]]$stop()
+        rD <- NULL
+        try(gc(rD))
+      }
+      if (.Platform$OS.type == "unix") {
+        system("/bin/sh")
+        system("killchrome.sh")
+        system("kill $(ps aux | grep 'chromedrive[r]' | awk '{print $2}')")
+      } else {
+        system("taskkill /im java.exe /f", intern = FALSE, ignore.stdout = FALSE)
+      }
     }
-    if (.Platform$OS.type == "unix") {
-      system("/bin/sh")
-      system("killchrome.sh")
-      system("kill $(ps aux | grep 'chromedrive[r]' | awk '{print $2}')")
-    } else {
-      system("taskkill /im java.exe /f", intern = FALSE, ignore.stdout = FALSE)
-    }
-  }
-     rhversion
+    return(rhversion)
   }
 }
