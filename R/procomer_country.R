@@ -18,7 +18,7 @@ procomer_country <- function(url, download_path_var, version_driver) {
     geckover = NULL,
     phantomver = NULL,
     extraCapabilities = eCaps,
-    check = F
+    check = T
   )
   print("check0")
   ## set client

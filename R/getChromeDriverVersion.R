@@ -18,7 +18,10 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
         history = 10L,
         appname = "binman_chromedriver"
       ) %>% 
-        pluck("mac64") %>% 
+        pluck("mac64") %>%
+        mutate(numberver = str_remove_all(version, "[.]")) %>% 
+        mutate(numberver = as.numeric(numberver)) %>% 
+        arrange(desc(numberver)) %>% 
         pull(version)
     }else{
       versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
@@ -27,6 +30,9 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
         appname = "binman_chromedriver"
       ) %>% 
         pluck("linux64") %>% 
+        mutate(numberver = str_remove_all(version, "[.]")) %>% 
+        mutate(numberver = as.numeric(numberver)) %>% 
+        arrange(desc(numberver)) %>% 
         pull(version)
     }
     ## on Windows a plattform-specific bug prevents us from calling the Google Chrome binary directly to get its version number
@@ -47,26 +53,15 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
         appname = "binman_chromedriver"
       ) %>% 
         pluck("win32") %>% 
+        mutate(numberver = str_remove_all(version, "[.]")) %>% 
+        mutate(numberver = as.numeric(numberver)) %>% 
+        arrange(desc(numberver)) %>% 
         pull(version)
   } else {
     rlang::abort(message = "Your OS couldn't be determined (Linux, macOS, Windows) or is not supported!")
   }
   print("funcion de driver")
   print(versions)
-  # ... and determine most recent ChromeDriver version matching it
-  # if (length(versions) == 0) {
-  #   chrome_driver_version
-  #   # %>%
-  #     # magrittr::extract(!is.na(.)) %>%
-  #     # stringr::str_replace_all(
-  #     #   pattern = "\\.",
-  #     #   replacement = "\\\\."
-  #     # ) %>%
-  #     # paste0("^", .) %>%
-  #     # # as.numeric_version() %>%
-  #     # max() %>%
-  #     # as.character()
-  # } else {
     chrome_driver_version %>%
       magrittr::extract(!is.na(.)) %>%
       stringr::str_replace_all(
@@ -78,7 +73,6 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
       as.numeric_version() %>%
       max() %>%
       as.character()
-  # }
 }
 
 driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
