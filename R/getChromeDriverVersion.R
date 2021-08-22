@@ -11,7 +11,24 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
         stderr = TRUE
       ) %>%
       stringr::str_extract(pattern = "(?<=Chrome )(\\d+\\.){3}")
-
+    
+    if (xfun::is_macos()) {
+      versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
+        platform = "mac64",
+        history = 10L,
+        appname = "binman_chromedriver"
+      ) %>% 
+        pluck("mac64") %>% 
+        pull(version)
+    }else{
+      versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
+        platform = "linux64",
+        history = 3L,
+        appname = "binman_chromedriver"
+      ) %>% 
+        pluck("linux64") %>% 
+        pull(version)
+    }
     ## on Windows a plattform-specific bug prevents us from calling the Google Chrome binary directly to get its version number
     ## cf. https://bugs.chromium.org/p/chromium/issues/detail?id=158372
   } else if (xfun::is_windows()) {
@@ -23,25 +40,33 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
         stderr = TRUE
       ) %>%
       stringr::str_extract(pattern = "(?<=Version=)(\\d+\\.){3}")
+    
+    versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
+        platform = "win32",
+        history = 3L,
+        appname = "binman_chromedriver"
+      ) %>% 
+        pluck("win32") %>% 
+        pull(version)
   } else {
     rlang::abort(message = "Your OS couldn't be determined (Linux, macOS, Windows) or is not supported!")
   }
   print("funcion de driver")
   print(versions)
   # ... and determine most recent ChromeDriver version matching it
-  if (length(versions) == 0) {
-    chrome_driver_version
-    # %>%
-      # magrittr::extract(!is.na(.)) %>%
-      # stringr::str_replace_all(
-      #   pattern = "\\.",
-      #   replacement = "\\\\."
-      # ) %>%
-      # paste0("^", .) %>%
-      # # as.numeric_version() %>%
-      # max() %>%
-      # as.character()
-  } else {
+  # if (length(versions) == 0) {
+  #   chrome_driver_version
+  #   # %>%
+  #     # magrittr::extract(!is.na(.)) %>%
+  #     # stringr::str_replace_all(
+  #     #   pattern = "\\.",
+  #     #   replacement = "\\\\."
+  #     # ) %>%
+  #     # paste0("^", .) %>%
+  #     # # as.numeric_version() %>%
+  #     # max() %>%
+  #     # as.character()
+  # } else {
     chrome_driver_version %>%
       magrittr::extract(!is.na(.)) %>%
       stringr::str_replace_all(
@@ -53,7 +78,7 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
       as.numeric_version() %>%
       max() %>%
       as.character()
-  }
+  # }
 }
 
 driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
