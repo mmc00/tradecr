@@ -13,9 +13,11 @@ procomer_country <- function(url, download_path_var, version_driver) {
   ## set driver
   print("check-1")
   driver <- RSelenium::rsDriver(
-    # chromever = vers[drivern],
     chromever = version_driver,
-    port = 4562L, extraCapabilities = eCaps
+    port = 4567L,
+    geckover = NULL,
+    phantomver = NULL,
+    extraCapabilities = eCaps
   )
   print("check0")
   ## set client
