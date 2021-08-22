@@ -83,7 +83,7 @@ jobs:
           restore-keys: ${{ runner.os }}-renv-
 
       - name: Restore packages
-        shell: Rscript {0}
+        shell: sudo Rscript {0}
         run: |
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
