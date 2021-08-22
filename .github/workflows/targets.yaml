@@ -54,6 +54,7 @@ jobs:
           && rm -rf chromedriver_linux64.zip \
           && sudo mkdir -p ~/.local/share/binman_chromedriver/ \
           && sudo mkdir -p ~/.local/share/binman_chromedriver/linux64/ \
+          && sudo mkdir -p ~/.local/share/binman_chromedriver/linux64/$CHROMEDRIVER_RELEASE \
           && sudo mv chromedriver ~/.local/share/binman_chromedriver/ \
           && sudo chmod +rwx ~/.local/share/binman_chromedriver/ \
           && sudo chmod +rwx ~/.local/share/binman_chromedriver/linux64/ \
@@ -113,7 +114,7 @@ jobs:
 
       - name: Run targets pipeline
         run: targets::tar_make()
-        shell: sudo Rscript {0}
+        shell: Rscript {0}
 
       - name: Identify files that the targets pipeline produced
         run: git ls-files -mo --exclude=renv > .targets-files
