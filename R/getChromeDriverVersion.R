@@ -26,11 +26,11 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
   } else {
     rlang::abort(message = "Your OS couldn't be determined (Linux, macOS, Windows) or is not supported!")
   }
-
+  print("funcion de driver")
+  print(versions)
   # ... and determine most recent ChromeDriver version matching it
   if (length(versions) == 0) {
     chrome_driver_version
-    print(chrome_driver_version)
     # %>%
       # magrittr::extract(!is.na(.)) %>%
       # stringr::str_replace_all(
