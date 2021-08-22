@@ -8,11 +8,6 @@ procomer_country <- function(url, download_path_var, version_driver) {
       ))
   )
   print(eCaps)
-  ## Version of chrome driver
-  # vers <- binman::list_versions("chromedriver") %>%
-  #   unname() %>%
-  #   unlist()
-  # drivern <- length(vers) - 1
   print(version_driver)
   print(version_driver)
   ## set driver
@@ -26,7 +21,7 @@ procomer_country <- function(url, download_path_var, version_driver) {
   remote_driver <- driver[["client"]]
   remote_driver$open()
   remote_driver$navigate(url)
-
+  print("check1")
   ## clicks
   ### Manual 6
   address_element <-
@@ -36,8 +31,7 @@ procomer_country <- function(url, download_path_var, version_driver) {
     )
   address_element$clickElement()
   Sys.sleep(3)
-
-
+  print("check2")
   ### Region
   address_element <-
     remote_driver$findElement(
@@ -46,6 +40,7 @@ procomer_country <- function(url, download_path_var, version_driver) {
     )
   address_element$clickElement()
   Sys.sleep(3)
+  print("check3")
   ### Pais
   address_element2 <-
     remote_driver$findElement(
@@ -54,7 +49,7 @@ procomer_country <- function(url, download_path_var, version_driver) {
     )
   address_element2$clickElement()
   Sys.sleep(2)
-
+  print("check4")
 
   ### Selección de años
   #### casilla de años
@@ -65,6 +60,7 @@ procomer_country <- function(url, download_path_var, version_driver) {
     )
   address_element$clickElement()
   Sys.sleep(2)
+  print("check5")
   #### todos los años
   address_element <-
     remote_driver$findElement(
@@ -73,6 +69,7 @@ procomer_country <- function(url, download_path_var, version_driver) {
     )
   address_element$clickElement()
   Sys.sleep(2)
+  print("check6")
   #### aplicar cambios
   address_element <-
     remote_driver$findElement(
@@ -81,7 +78,7 @@ procomer_country <- function(url, download_path_var, version_driver) {
     )
   address_element$clickElement()
   Sys.sleep(3)
-
+  print("check7")
   ### descarga
   address_element <-
     remote_driver$findElement(
@@ -90,16 +87,20 @@ procomer_country <- function(url, download_path_var, version_driver) {
     )
   address_element$clickElement()
   Sys.sleep(2)
-
+  print("check8")
   ### removemos
   remote_driver$close()
+  print("check9")
   driver$client$quit()
+  print("check10")
   rm(driver)
+  print("check11")
   gc()
+  print("check12")
   system("taskkill /im java.exe /f", intern = FALSE, ignore.stdout = FALSE)
-
+  print("check13")
   #### path
   path_return <- paste0(download_path, "\\", "PivotGrid.xls")
-
+  print("check14")
   return(path_return)
 }
