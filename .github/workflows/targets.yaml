@@ -73,7 +73,7 @@ jobs:
 
       - name: Python Procomer
         run: | 
-          python ./python/proco.py
+          sudo python ./python/proco.py
 
       - name: Identify files that the targets pipeline produced
         run: git ls-files -mo --exclude=renv > .targets-files
