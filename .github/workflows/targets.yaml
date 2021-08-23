@@ -54,10 +54,11 @@ jobs:
           && cd /tmp \
           && unzip chromedriver_linux64.zip \
           && rm -rf chromedriver_linux64.zip \
-          && sudo mkdir -p ~/.local/share/binman_chromedriver/ \
-          && sudo mv chromedriver ~/.local/share/binman_chromedriver/ \
-          && sudo chmod +rwx ~/.local/share/binman_chromedriver/ \
-          && chromedriver --version
+          && sudo mkdir -p $DRIVER_PATH \
+          && sudo mv chromedriver $DRIVER_PATH \
+          && sudo chmod +rwx $DRIVER_PATH \
+          && chromedriver --version \
+          && ls -R $DRIVER_PATH
         shell: bash
 
       - uses: actions/checkout@v2
