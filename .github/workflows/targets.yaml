@@ -44,7 +44,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RENV_PATHS_ROOT: ~/.local/share/renv
       TEMP_PATH: ./temp
-      DRIVER_PATH: ~/.local/share/binman_chromedriver/chromedriver 
+      DRIVER_PATH: ~/.local/share/binman_chromedriver/ 
     steps:
       - name: Chrome driver
         run: |
