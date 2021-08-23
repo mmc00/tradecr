@@ -4,6 +4,8 @@ import os
 
 download_path = os.getenv('TEMP_PATH')
 driver_path = os.getenv('DRIVER_PATH')
+# download_path = "D:\\tradecr\\temp"
+# driver_path = "D:\chromedriver_win32\chromedriver.exe"
 
 options = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : download_path}
@@ -29,7 +31,7 @@ pais.click()
 time.sleep(1)
 
 # Selección de años
-## casilla de años
+# casilla de años
 years = browser.find_element_by_id('ASPxPivotGrid1_sortedpgHeader5F')
 years.click()
 time.sleep(1)
