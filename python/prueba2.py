@@ -8,3 +8,5 @@ driver_path = os.getenv('DRIVER_PATH')
 # download_path = "D:\\tradecr\\temp"
 # driver_path = "D:\chromedriver_win32\chromedriver.exe"
 options = webdriver.ChromeOptions()
+print(download_path)
+prefs = {"download.default_directory" : download_path}
