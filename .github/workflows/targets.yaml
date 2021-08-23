@@ -77,7 +77,7 @@ jobs:
 
       - name: Python Procomer
         run: | 
-        pyrhon ./python/proco.py
+        python ./python/proco.py
 
       - name: Identify files that the targets pipeline produced
         run: git ls-files -mo --exclude=renv > .targets-files
