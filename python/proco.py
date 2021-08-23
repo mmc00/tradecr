@@ -9,7 +9,7 @@ options = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : download_path}
 options.add_experimental_option("prefs",prefs)
 
-browser = webdriver.Chrome("driver_path",
+browser = webdriver.Chrome(driver_path,
 chrome_options=options)
 
 
