@@ -14,8 +14,8 @@ tar_option_set(packages = c(
   "readxl",
   "binman",
   "Microsoft365R"
-))
-# debug = "temp_country") # add packages here
+),
+debug = "chrome_version") # add packages here
 # params
 download_path <- normalizePath(here("temp"))
 temp_path <- here("temp")

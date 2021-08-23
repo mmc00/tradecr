@@ -12,28 +12,30 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
       ) %>%
       stringr::str_extract(pattern = "(?<=Chrome )(\\d+\\.){3}")
     
-    if (xfun::is_macos()) {
-      versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
-        platform = "mac64",
-        history = 10L,
-        appname = "binman_chromedriver"
-      ) %>% 
-        pluck("mac64") %>%
-        mutate(numberver = str_remove_all(version, "[.]")) %>% 
-        mutate(numberver = as.numeric(numberver)) %>% 
-        arrange(desc(numberver)) %>% 
-        pull(version)
-    }else{
-      versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
-        platform = "linux64",
-        history = 3L,
-        appname = "binman_chromedriver"
-      ) %>% 
-        pluck("linux64") %>% 
-        mutate(numberver = str_remove_all(version, "[.]")) %>% 
-        mutate(numberver = as.numeric(numberver)) %>% 
-        arrange(desc(numberver)) %>% 
-        pull(version)
+    if (length(versions) == 0){
+      if (xfun::is_macos()) {
+        versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
+                                                 platform = "mac64",
+                                                 history = 10L,
+                                                 appname = "binman_chromedriver"
+        ) %>% 
+          pluck("mac64") %>%
+          mutate(numberver = str_remove_all(version, "[.]")) %>% 
+          mutate(numberver = as.numeric(numberver)) %>% 
+          arrange(desc(numberver)) %>% 
+          pull(version)
+      }else{
+        versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
+                                                 platform = "linux64",
+                                                 history = 3L,
+                                                 appname = "binman_chromedriver"
+        ) %>% 
+          pluck("linux64") %>% 
+          mutate(numberver = str_remove_all(version, "[.]")) %>% 
+          mutate(numberver = as.numeric(numberver)) %>% 
+          arrange(desc(numberver)) %>% 
+          pull(version)
+      }
     }
     ## on Windows a plattform-specific bug prevents us from calling the Google Chrome binary directly to get its version number
     ## cf. https://bugs.chromium.org/p/chromium/issues/detail?id=158372
@@ -47,16 +49,18 @@ getChromeDriverVersion <- function(versions = binman::list_versions("chromedrive
       ) %>%
       stringr::str_extract(pattern = "(?<=Version=)(\\d+\\.){3}")
     
-    versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
-        platform = "win32",
-        history = 3L,
-        appname = "binman_chromedriver"
-      ) %>% 
-        pluck("win32") %>% 
-        mutate(numberver = str_remove_all(version, "[.]")) %>% 
-        mutate(numberver = as.numeric(numberver)) %>% 
-        arrange(desc(numberver)) %>% 
-        pull(version)
+    if (length(versions) == 0){
+      versions <- binman::predl_google_storage("https://www.googleapis.com/storage/v1/b/chromedriver/o/",
+          platform = "win32",
+          history = 3L,
+          appname = "binman_chromedriver"
+        ) %>% 
+          pluck("win32") %>% 
+          mutate(numberver = str_remove_all(version, "[.]")) %>% 
+          mutate(numberver = as.numeric(numberver)) %>% 
+          arrange(desc(numberver)) %>% 
+          pull(version)
+    }
   } else {
     rlang::abort(message = "Your OS couldn't be determined (Linux, macOS, Windows) or is not supported!")
   }
