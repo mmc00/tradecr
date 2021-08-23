@@ -72,11 +72,10 @@ jobs:
           sudo pip3 install selenium
 
       - name: Python Procomer
+        run: python -c 'import os;print(os.environ)'
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
-        run: | 
-          sudo python ./python/proco.py
 
       - name: Identify files that the targets pipeline produced
         run: git ls-files -mo --exclude=renv > .targets-files
