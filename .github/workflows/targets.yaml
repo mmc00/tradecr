@@ -64,11 +64,28 @@ jobs:
           && sudo chmod +rwx ~/.local/share/binman_chromedriver/linux64/$CHROMEDRIVER_RELEASE \
           && chromedriver --version
         shell: bash
-      
+
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-pandoc@master
+
+      - name: Install Mac system dependencies
+        if: runner.os == 'macOS'
+        run: brew install zeromq
+
+      - name: Install Linux system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libssl-dev
+          sudo apt-get install libzmq3-dev
+
+      - name: Setting python
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium
       - name: selenium_procomer
         run: | 
-         python -m pip install --upgrade pip
-         pip install selenium
          from selenium import webdriver
          import time
          options = webdriver.ChromeOptions()
@@ -99,22 +116,6 @@ jobs:
          downloadclick.click()
          time.sleep(1)
          browser.close()
-      
-      
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
-      - uses: r-lib/actions/setup-pandoc@master
-
-      - name: Install Mac system dependencies
-        if: runner.os == 'macOS'
-        run: brew install zeromq
-
-      - name: Install Linux system dependencies
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get install libcurl4-openssl-dev
-          sudo apt-get install libssl-dev
-          sudo apt-get install libzmq3-dev
 
       - name: Identify files that the targets pipeline produced
         run: git ls-files -mo --exclude=renv > .targets-files
