@@ -29,12 +29,12 @@ pais = browser.find_element_by_id('ASPxRoundPanel2_CBPais_S_D')
 pais.click()
 time.sleep(1)
 
-# Selección de años
-# casilla de años
+# Selección de anos
+# casilla de anos
 years = browser.find_element_by_id('ASPxPivotGrid1_sortedpgHeader5F')
 years.click()
 time.sleep(1)
-## todos los años
+## todos los anos
 allyears = browser.find_element_by_id('ASPxPivotGrid1FTRIAll')
 allyears.click()
 time.sleep(1)
