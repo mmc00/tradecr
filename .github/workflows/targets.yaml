@@ -90,7 +90,7 @@ jobs:
 
       - name: selenium_procomer
         run: | 
-         from selenium import webdriver
+         python from selenium import webdriver
          import time
          options = webdriver.ChromeOptions()
          prefs = {"download.default_directory" :  ${{env.TEMP_PATH}}}
