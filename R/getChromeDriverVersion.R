@@ -93,6 +93,7 @@ driver_number <- function(port = 4567L, force = FALSE, verbose = FALSE) {
   } else {
     print("hola")
     versions <- c(versions$mac64, getChromeDriverVersion(versions))
+    print(versions)
     v <- length(versions) + 1
     while (v && (is.null(rD) || cond_val)) {
       rhversion <- versions[v]
