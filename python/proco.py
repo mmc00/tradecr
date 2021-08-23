@@ -3,8 +3,8 @@ from selenium import webdriver
 import time
 import os
 
-download_path = os.environ['TEMP_PATH']
-driver_path = os.environ['DRIVER_PATH']
+download_path = os.environ['INPUT_TEMP_PATH']
+driver_path = os.environ['INPUT_DRIVER_PATH']
 print(download_path)
 # download_path = "D:\\tradecr\\temp"
 # driver_path = "D:\chromedriver_win32\chromedriver.exe"
