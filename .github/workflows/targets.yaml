@@ -88,6 +88,14 @@ jobs:
           sudo python -m pip install --upgrade pip
           sudo pip install selenium
 
+      - name: Create temp folder
+        run: |
+          rm -rf $TEMP_PATH
+          sudo mkdir -p $TEMP_PATH
+          sudo chmod +rwx $TEMP_PATH
+        env: 
+          TEMP_PATH: ./temp
+
       - name: Python Procomer
         run: 
           sudo -E python ./python/proco.py
@@ -111,9 +119,6 @@ jobs:
 
       - name: Upload latest run
         run: |
-          cd ./
-          sudo chmod -R 775 .git
-          sudo chmod 'g=rwx,u=rwx,o=x' ./temp
           sudo git config --local user.name "GitHub Actions"
           sudo git config --local user.email "actions@github.com"
           sudo rm -r .gitignore .github/workflows
