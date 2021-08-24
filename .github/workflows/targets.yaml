@@ -94,11 +94,14 @@ jobs:
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
-
+      
+      - name: Permission for temp
+        run:
+          sudo chmod +rwx ./temp
+          
       - name: Identify files that the targets pipeline produced
         run:
-          sudo chmod +rwx ./temp \
-          && git ls-files -mo --exclude=renv > .targets-files
+          git ls-files -mo --exclude=renv > .targets-files
 
       - name: Create the runs branch if it does not already exist
         if: steps.runs-exist.outcome != 'success'
