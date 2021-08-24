@@ -5,8 +5,8 @@ import os
 
 download_path = os.getenv('TEMP_PATH')
 driver_path = os.getenv('DRIVER_PATH')
-print(os.getenv('TEMP_PATH'))
-print(os.getenv('DRIVER_PATH'))
+# print(os.getenv('TEMP_PATH'))
+# print(os.getenv('DRIVER_PATH'))
 os.chmod(driver_path, 0o7550)
 
 options = webdriver.ChromeOptions()
