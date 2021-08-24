@@ -55,3 +55,4 @@ downloadclick.click()
 time.sleep(5)
 # close
 browser.close()
+browser.quit()
