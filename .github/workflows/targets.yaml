@@ -73,7 +73,7 @@ jobs:
 
       - name: Python Procomer
         run: 
-          sudo chmod rwx $DRIVER_PATH \
+          sudo chmod 777 $DRIVER_PATH \
           && python ./python/proco.py
         env:
           TEMP_PATH: ./temp
