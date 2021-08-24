@@ -97,8 +97,8 @@ jobs:
 
       - name: Identify files that the targets pipeline produced
         run:
-          sudo chmod +rwx ./temp 
-          git ls-files -mo --exclude=renv > .targets-files
+          sudo chmod +rwx ./temp \
+          && git ls-files -mo --exclude=renv > .targets-files
 
       - name: Create the runs branch if it does not already exist
         if: steps.runs-exist.outcome != 'success'
