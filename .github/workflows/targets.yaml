@@ -88,13 +88,6 @@ jobs:
           sudo python -m pip install --upgrade pip
           sudo pip install selenium
 
-      - name: Create temp folder
-        run: |
-          sudo mkdir ${TEMP_PATH} \
-          && sudo chmod +rwx ${TEMP_PATH}
-        env: 
-          TEMP_PATH: ./temp
-
       - name: Python Procomer
         run: 
           sudo -E python ./python/proco.py
