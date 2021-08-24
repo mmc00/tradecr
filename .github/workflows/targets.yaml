@@ -69,6 +69,19 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
+      
+      - name: Check if previous runs exists
+        id: runs-exist
+        run: git ls-remote --exit-code --heads origin targets-runs
+        continue-on-error: true
+
+      - name: Checkout previous run
+        if: steps.runs-exist.outcome == 'success'
+        uses: actions/checkout@v2
+        with:
+          ref: targets-runs
+          fetch-depth: 1
+          path: .targets-runs
 
       - name: Setting python
         run: |
@@ -106,8 +119,8 @@ jobs:
           do
             sudo git add $file
           done
-          sudo git commit -am "Run pipeline"
-          sudo git push origin targets-runs
+          git commit -am "Run pipeline"
+          git push origin targets-runs
 
       - name: Prepare failure artifact
         if: failure()
