@@ -113,7 +113,7 @@ jobs:
         run: |
           cd ./
           sudo chmod -R 775 .git
-          sudo chmod 'g=rwx,u=rwx,o=x' /temp
+          sudo chmod 'g=rwx,u=rwx,o=x' ./temp
           sudo git config --local user.name "GitHub Actions"
           sudo git config --local user.email "actions@github.com"
           sudo rm -r .gitignore .github/workflows
