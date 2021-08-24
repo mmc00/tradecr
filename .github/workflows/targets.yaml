@@ -103,7 +103,7 @@ jobs:
       - name: Python Procomer by country
         run: 
           sudo -E python ./python/proco_pais.py \
-          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_${env.MY_DATE}.xls
+          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_${{env.MY_DATE}}.xls
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
@@ -111,7 +111,7 @@ jobs:
       - name: Python Procomer by chapter
         run: 
           sudo -E python ./python/proco_capi.py \
-          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_${env.MY_DATE}.xls
+          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_${{env.MY_DATE}}.xls
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver 
