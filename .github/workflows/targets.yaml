@@ -96,12 +96,19 @@ jobs:
         env: 
           TEMP_PATH: ./temp
 
-      - name: Python Procomer
+      - name: Python Procomer by country
         run: 
-          sudo -E python ./python/proco.py
+          sudo -E python ./python/proco_pais.py
         env:
           TEMP_PATH: ./temp
-          DRIVER_PATH: /usr/local/bin/chromedriver     
+          DRIVER_PATH: /usr/local/bin/chromedriver
+
+      - name: Python Procomer by capitulo
+        run: 
+          sudo -E python ./python/proco_capi.py
+        env:
+          TEMP_PATH: ./temp
+          DRIVER_PATH: /usr/local/bin/chromedriver 
           
       - name: Identify files that the targets pipeline produced
         run:
