@@ -1,30 +1,8 @@
 {
 	"folders": [
 		{
-			"path": "C:\\Documentos\\vat_optim\\julia"
-		},
-		{
-			"path": "..\\..\\vat_optim\\julia"
+			"path": "."
 		}
 	],
-	"launch": {
-		"version": "0.2.0",
-		"configurations": [
-			{
-				"type": "julia",
-				"request": "launch",
-				"name": "Run active Julia file",
-				"program": "${file}",
-				"stopOnEntry": false,
-				"cwd": "${workspaceFolder}",
-				"juliaEnv": "${command:activeJuliaEnvironment}"
-			}
-		]
-	},
-	"settings": {
-		"python.defaultInterpreterPath": "C:\\Users\\Marlon\\Anaconda3\\python.exe",
-		"python.condaPath": "C:\\Users\\Marlon\\Anaconda3\\python.exe",
-		"python.autoComplete.addBrackets": true,
-		"python.analysis.completeFunctionParens": true
-	}
+	"settings": {}
 }
