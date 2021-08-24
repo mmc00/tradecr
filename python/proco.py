@@ -12,6 +12,7 @@ os.chmod(driver_path, 0o7550)
 options = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : download_path}
 options.add_experimental_option("prefs",prefs)
+options.add_argument("--remote-debugging-port=9222")
 browser = webdriver.Chrome(driver_path, options=options)
 
 # start browsing
