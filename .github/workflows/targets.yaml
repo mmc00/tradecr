@@ -73,7 +73,7 @@ jobs:
 
       - name: Python Procomer
         run: 
-          sudo -E TEMP_PATH = "$TEMP_PATH" DRIVER_PATH = "$DRIVER_PATH" python ./python/proco.py
+          sudo -E python ./python/proco.py
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
