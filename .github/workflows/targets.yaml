@@ -95,11 +95,15 @@ jobs:
           && sudo chmod +rwx ${TEMP_PATH}
         env: 
           TEMP_PATH: ./temp
-
+      
+      - name: Set time
+        run: |
+          echo "time=$(date + "%Y-%m-%d")" >> $GITHUB_ENV
+    
       - name: Python Procomer by country
         run: 
           sudo -E python ./python/proco_pais.py \
-          && sudo mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data.xls
+          && sudo mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_${TIME}.xls
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
@@ -107,7 +111,7 @@ jobs:
       - name: Python Procomer by chapter
         run: 
           sudo -E python ./python/proco_capi.py \
-          && sudo mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data.xls
+          && sudo mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_${env.TIME}.xls
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver 
