@@ -46,10 +46,10 @@ jobs:
       TEMP_PATH: ./temp
       DRIVER_PATH: /usr/local/bin/
     steps:
+      - uses: browser-actions/setup-chrome@latest
       - name: Set up Chrome
-        uses: browser-actions/setup-chrome@latest
         run: chrome --version
-        
+
       - name: Chrome driver
         run: |
           CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
