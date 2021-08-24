@@ -104,7 +104,7 @@ jobs:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
 
-      - name: Python Procomer by capitulo
+      - name: Python Procomer by chapter
         run: 
           sudo -E python ./python/proco_capi.py
           sudo mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data.xls
