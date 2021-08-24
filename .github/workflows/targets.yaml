@@ -96,7 +96,9 @@ jobs:
           DRIVER_PATH: /usr/local/bin/chromedriver
 
       - name: Identify files that the targets pipeline produced
-        run: git ls-files -mo --exclude=renv > .targets-files
+        run:
+          sudo chmod +rwx ./temp 
+          git ls-files -mo --exclude=renv > .targets-files
 
       - name: Create the runs branch if it does not already exist
         if: steps.runs-exist.outcome != 'success'
@@ -111,7 +113,6 @@ jobs:
 
       - name: Upload latest run
         run: |
-          sudo chmod +rwx ./temp
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
           rm -r .gitignore .github/workflows
