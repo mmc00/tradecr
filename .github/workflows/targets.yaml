@@ -105,7 +105,7 @@ jobs:
           sudo -E python ./python/proco_pais.py \
           && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_${TIME}.xls
         env:
-          TIME: ${{time}}
+          TIME: ${time}
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
 
@@ -114,7 +114,7 @@ jobs:
           sudo -E python ./python/proco_capi.py \
           && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_${TIME}.xls
         env:
-          TIME: ${{time}}
+          TIME: ${time}
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver 
           
