@@ -72,7 +72,9 @@ jobs:
           pip install selenium
 
       - name: Python Procomer
-        run: sudo -E python ./python/proco.py
+        run: 
+          sudo chmod rwx $DRIVER_PATH
+          sudo -E python ./python/proco.py
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
