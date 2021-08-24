@@ -111,6 +111,7 @@ jobs:
 
       - name: Upload latest run
         run: |
+          sudo chmod +rwx ./temp
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
           rm -r .gitignore .github/workflows
