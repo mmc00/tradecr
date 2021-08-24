@@ -5,9 +5,9 @@ import os
 
 download_path = os.getenv('TEMP_PATH')
 driver_path = os.getenv('DRIVER_PATH')
-# print(os.getenv('TEMP_PATH'))
-# print(os.getenv('DRIVER_PATH'))
 # os.chmod(driver_path, 0o7550)
+# download_path = "C:\\Documentos\\tradecr\\temp"
+# driver_path = "C:\\Users\\Marlon.molina\\AppData\\Local\\binman\\binman_chromedriver\\win32\\92.0.4515.107\\chromedriver.exe"
 
 options = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : download_path}
@@ -36,7 +36,7 @@ time.sleep(3)
 # partida
 pais = browser.find_element_by_id('ASPxRoundPanel2_CBPartida')
 pais.click()
-time.sleep(3)
+time.sleep(4)
 # Check years
 ## check years
 years = browser.find_element_by_id('ASPxPivotGrid1_sortedpgHeader5F')
