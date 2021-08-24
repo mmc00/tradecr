@@ -49,6 +49,7 @@ time.sleep(2)
 ## apply changes
 appyears = browser.find_element_by_id('ASPxPivotGrid1_FPWOK_B')
 appyears.click()
+time.sleep(2)
 # download
 downloadclick = browser.find_element_by_id('ASPxRoundPanel3_ImageButton3')
 downloadclick.click()
