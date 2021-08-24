@@ -52,6 +52,6 @@ appyears.click()
 # download
 downloadclick = browser.find_element_by_id('ASPxRoundPanel3_ImageButton3')
 downloadclick.click()
-time.sleep(2)
+time.sleep(5)
 # close
 browser.close()

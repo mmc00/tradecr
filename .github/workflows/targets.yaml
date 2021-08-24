@@ -98,9 +98,9 @@ jobs:
 
       - name: Upload latest run
         run: |
-          sudo git config --local user.name "GitHub Actions"
-          sudo git config --local user.email "actions@github.com"
-          sudo rm -r .gitignore .github/workflows
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          rm -r .gitignore .github/workflows
           sudo git add --all -- ':!renv'
           for file in $(git ls-files -mo --exclude=renv)
           do
