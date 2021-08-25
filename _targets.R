@@ -5,7 +5,7 @@ library(here)
 
 ## setting path
 # if (xfun::is_windows()) {
-here::i_am("targets.R")
+here::i_am("_targets.R")
 # } else {
 # here::i_am("tradecr/_targets.R")
 # }
