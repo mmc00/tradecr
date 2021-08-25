@@ -128,7 +128,7 @@ jobs:
           restore-keys: ${{ runner.os }}-renv-
 
       - name: Restore packages
-        shell: Rscript {0}
+        shell: sudo -E Rscript {0}
         run: |
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
@@ -145,7 +145,7 @@ jobs:
 
       - name: Run targets pipeline
         run: targets::tar_make()
-        shell: Rscript {0}
+        shell: sudo -E Rscript {0}
 
       - name: Identify files that the targets pipeline produced
         run:
