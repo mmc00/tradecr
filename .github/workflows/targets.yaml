@@ -141,7 +141,7 @@ jobs:
             if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
             if (file.exists(source)) file.rename(source, dest)
           }
-        shell: Rscript {0}
+        shell: sudo - E Rscript {0}
 
       - name: Run targets pipeline
         run: targets::tar_make()
