@@ -2,7 +2,13 @@
 library(targets)
 library(tarchetypes)
 library(here)
-here::i_am("_targets.R")
+
+## setting path
+if (xfun::is_windows()) {
+  here::i_am("targets.R")
+} else {
+  here::i_am("tradecr/_targets.R")
+}
 sapply(list.files(here("R"), full.names = T), source)
 options(tidyverse.quiet = TRUE)
 tar_option_set(packages = c(
