@@ -52,7 +52,7 @@ reading_old_data <- function(path, dummy){
 
 last_old_data <- function(data, dummy){
   id_date <- data %>%
-    mutate(time = as.POSIXlt(time)) %>% 
+    # mutate(time = as.POSIXlt(time)) %>% 
     mutate(
       id_year = year(time),
       id_month = month(time),
