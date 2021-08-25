@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      RENV_PATHS_ROOT: ~/.local/share/renv
+      RENV_PATHS_ROOT: ./renv
       TEMP_PATH: ./temp
       DRIVER_PATH: /usr/local/bin/
     steps:
@@ -141,7 +141,7 @@ jobs:
             if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
             if (file.exists(source)) file.rename(source, dest)
           }
-        shell: sudo - E Rscript {0}
+        shell: sudo -E Rscript {0}
 
       - name: Run targets pipeline
         run: targets::tar_make()
