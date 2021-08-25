@@ -24,7 +24,7 @@ tar_option_set(packages = c(
 # params
 download_path <- normalizePath(here("temp"))
 temp_path <- here("temp")
-dir.create(temp_path, showWarnings = F)
+# dir.create(temp_path, showWarnings = F)
 # flow
 list(
   # path for files
