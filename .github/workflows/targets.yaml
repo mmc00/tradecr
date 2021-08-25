@@ -102,7 +102,7 @@ jobs:
     
       - name: Python Procomer by country
         run: 
-          && sudo -E python ./python/proco_pais.py \
+          sudo -E python ./python/proco_pais.py \
           && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_`date '+%Y_%m_%d__%H_%M_%S'`.xls
         env:
           TEMP_PATH: ./temp
@@ -110,7 +110,7 @@ jobs:
 
       - name: Python Procomer by chapter
         run: 
-          && sudo -E python ./python/proco_capi.py \
+          sudo -E python ./python/proco_capi.py \
           && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_`date '+%Y_%m_%d__%H_%M_%S'`.xls
         env:
           TEMP_PATH: ./temp
