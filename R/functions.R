@@ -35,6 +35,8 @@ long_chapter_data <- function(path) {
 }
 
 append_data <- function(data, name){
+  print(name)
+  print(relative_path)
   relative_path <- here("data", name)
   if (file.exists(relative_path)) {
     write.table(data, relative_path, append = T, row.names = F)
