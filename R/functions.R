@@ -1,5 +1,7 @@
 long_country_data <- function(path, dummy) {
+  print("este el path")
   print(path)
+  print("esta es la dumm (NULL)")
   print(dummy)
   data <- read_excel(path) %>%
     rename("country" = "...1") %>%

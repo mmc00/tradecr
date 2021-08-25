@@ -30,20 +30,20 @@ list(
   # setting main path
   tar_target(main_path,
              here::i_am("_targets.R")
-             ),
+  ),
   # path for files
   tar_target(
     temp.condata.path,
-    list.files(here("temp")) %>%
+    list.files("temp") %>%
       str_subset(., "con_data") %>%
-      here("temp", .),
+      paste0("temp/", .),
     format = "file"
   ),
   tar_target(
     temp.capdata.path,
-    list.files(here("temp")) %>%
+    list.files("temp") %>%
       str_subset(., "cap_data") %>%
-      here("temp", .),
+      paste0("temp/", .),
     format = "file"
   ),
   # reshape
