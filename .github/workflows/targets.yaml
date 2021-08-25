@@ -102,18 +102,18 @@ jobs:
     
       - name: Python Procomer by country
         run: 
-          TIME=`date '+%Y_%m_%d__%H_%M_%S'` \
+          TIME=(`date '+%Y_%m_%d__%H_%M_%S'`) \
           && sudo -E python ./python/proco_pais.py \
-          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_${TIME}.xls
+          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_${nice_date[@]}.xls
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
 
       - name: Python Procomer by chapter
         run: 
-          TIME=`date '+%Y_%m_%d__%H_%M_%S'` \
+          TIME=(`date '+%Y_%m_%d__%H_%M_%S'`) \
           && sudo -E python ./python/proco_capi.py \
-          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_${TIME}.xls
+          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_${nice_date[@]}.xls
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver 
