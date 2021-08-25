@@ -27,6 +27,10 @@ temp_path <- here("temp")
 # dir.create(temp_path, showWarnings = F)
 # flow
 list(
+  # setting main path
+  tar_target(main_path,
+             here::i_am("_targets.R")
+             ),
   # path for files
   tar_target(
     temp.condata.path,
@@ -45,7 +49,8 @@ list(
   # reshape
   tar_target(
     temp.condata.long,
-    long_country_data(temp.condata.path)
+    long_country_data(temp.condata.path,
+                      main_path)
   ),
   tar_target(
     temp.capdata.long,

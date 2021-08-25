@@ -1,4 +1,6 @@
-long_country_data <- function(path) {
+long_country_data <- function(path, dummy) {
+  print(path)
+  print(dummy)
   data <- read_excel(path) %>%
     rename("country" = "...1") %>%
     # fixing uk
@@ -21,6 +23,7 @@ long_country_data <- function(path) {
 }
 
 long_chapter_data <- function(path) {
+  print(path)
   data <- read_excel(path) %>%
     rename("chapter" = "...1") %>%
     filter(chapter != "Grand Total") %>%
