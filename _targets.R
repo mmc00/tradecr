@@ -2,6 +2,7 @@
 library(targets)
 library(tarchetypes)
 library(here)
+here::i_am("_targets.R")
 sapply(list.files(here("R"), full.names = T), source)
 options(tidyverse.quiet = TRUE)
 tar_option_set(packages = c(
