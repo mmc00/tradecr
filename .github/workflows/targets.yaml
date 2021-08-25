@@ -96,10 +96,6 @@ jobs:
         env: 
           TEMP_PATH: ./temp
       
-      - name: Set time
-        run: |
-          echo "TIME=$(date + "%Y_%m_%d__%H_%M_%S")" >> $GITHUB_ENV
-    
       - name: Python Procomer by country
         run: 
           sudo -E python ./python/proco_pais.py \
@@ -116,6 +112,41 @@ jobs:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver 
           
+      - name: Install Linux system dependencies 4 targets and telegram
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libssl-dev
+          sudo apt-get install libzmq3-dev
+          sudo pip install python-telegram-bot
+
+      - name: Cache packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: ${{ runner.os }}-renv-
+
+      - name: Restore packages
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+
+      - name: Restore output files from the previous run
+        if: steps.runs-exist.outcome == 'success'
+        run: |
+          for (dest in scan(".targets-runs/.targets-files", what = character())) {
+            source <- file.path(".targets-runs", dest)
+            if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
+            if (file.exists(source)) file.rename(source, dest)
+          }
+        shell: Rscript {0}
+
+      - name: Run targets pipeline
+        run: targets::tar_make()
+        shell: Rscript {0}
+
       - name: Identify files that the targets pipeline produced
         run:
           git ls-files -mo --exclude=renv > .targets-files
