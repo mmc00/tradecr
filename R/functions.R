@@ -1,8 +1,13 @@
 long_country_data <- function(path, dummy) {
   print("este el path")
   print(path)
+  print("path class")
+  print(class(path))
+  print("print type")
+  print(typeof(path))
   print("esta es la dumm (NULL)")
   print(dummy)
+  date_dummy <- as.character(as.POSIXct(Sys.time()))
   data <- read_excel(path) %>%
     rename("country" = "...1") %>%
     # fixing uk
@@ -19,7 +24,7 @@ long_country_data <- function(path, dummy) {
     pivot_longer(-country, names_to = "year") %>%
     group_by(country, year) %>%
     summarise(value = sum(value, na.rm = T), .groups = "drop") %>% 
-    mutate(time = as.POSIXlt(Sys.time()))
+    mutate(time = date_dummy)
 
   return(data)
 }
