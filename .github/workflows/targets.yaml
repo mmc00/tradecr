@@ -209,7 +209,7 @@ jobs:
       - name: Melt targets-runs with dev
         run: |
           sudo git checkout targets-runs
-          sudo git merge origin/development
+          sudo git merge origin/development --allow-unrelated-histories
 
       - name: Match dev with master
         run: |
