@@ -7,6 +7,14 @@ file_path = os.getenv('CHECK_PATH')
 api_key = os.getenv('ITRADECRAPI')
 user_id = os.getenv('USER_CALL')
 
+print("file")
+print(file_path)
+print("api")
+print(api_key)
+print("user")
+print(user_id)
+
+
 with open(file_path) as fp:
     reader = csv.reader(fp, delimiter=",", quotechar='"')
     data_read = [row for row in reader]
