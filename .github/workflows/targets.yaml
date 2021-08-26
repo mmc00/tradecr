@@ -88,6 +88,12 @@ jobs:
           sudo python -m pip install --upgrade pip
           sudo pip install selenium
 
+      - name: List files 0
+        run:
+          sudo ls -l ${TEMP_PATH}
+        env: 
+          TEMP_PATH: ./temp
+
       - name: Setting up for temp folder
         run:
           sudo rm -rf ${TEMP_PATH} \
@@ -95,89 +101,95 @@ jobs:
           && sudo chmod +rwx ${TEMP_PATH}
         env: 
           TEMP_PATH: ./temp
-      
-      - name: Python Procomer by country
-        run: 
-          sudo -E python ./python/proco_pais.py \
-          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_`date '+%Y_%m_%d__%H_%M_%S'`.xls
-        env:
-          TEMP_PATH: ./temp
-          DRIVER_PATH: /usr/local/bin/chromedriver
 
-      - name: Python Procomer by chapter
-        run: 
-          sudo -E python ./python/proco_capi.py \
-          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_`date '+%Y_%m_%d__%H_%M_%S'`.xls
-        env:
-          TEMP_PATH: ./temp
-          DRIVER_PATH: /usr/local/bin/chromedriver 
-          
-      - name: Install Linux system dependencies 4 targets and telegram
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get install libcurl4-openssl-dev
-          sudo apt-get install libssl-dev
-          sudo apt-get install libzmq3-dev
-          sudo pip install python-telegram-bot
-
-      - name: Cache packages
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.RENV_PATHS_ROOT }}
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: ${{ runner.os }}-renv-
-
-      - name: Restore packages
-        shell: sudo -E Rscript {0}
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()
-
-      - name: Restore output files from the previous run
-        if: steps.runs-exist.outcome == 'success'
-        run: |
-          for (dest in scan(".targets-runs/.targets-files", what = character())) {
-            source <- file.path(".targets-runs", dest)
-            if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
-            if (file.exists(source)) file.rename(source, dest)
-          }
-        shell: sudo -E Rscript {0}
-
-      - name: Run targets pipeline
-        run: targets::tar_make()
-        shell: sudo -E Rscript {0}
-
-      - name: Identify files that the targets pipeline produced
+      - name: List files 1
         run:
-          git ls-files -mo --exclude=renv > .targets-files
+          sudo ls -l ${TEMP_PATH}
+        env: 
+          TEMP_PATH: ./temp
+      
+      # - name: Python Procomer by country
+      #   run: 
+      #     sudo -E python ./python/proco_pais.py \
+      #     && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_`date '+%Y_%m_%d__%H_%M_%S'`.xls
+      #   env:
+      #     TEMP_PATH: ./temp
+      #     DRIVER_PATH: /usr/local/bin/chromedriver
 
-      - name: Create the runs branch if it does not already exist
-        if: steps.runs-exist.outcome != 'success'
-        run: git checkout --orphan targets-runs
+      # - name: Python Procomer by chapter
+      #   run: 
+      #     sudo -E python ./python/proco_capi.py \
+      #     && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_`date '+%Y_%m_%d__%H_%M_%S'`.xls
+      #   env:
+      #     TEMP_PATH: ./temp
+      #     DRIVER_PATH: /usr/local/bin/chromedriver 
+          
+      # - name: Install Linux system dependencies 4 targets and telegram
+      #   if: runner.os == 'Linux'
+      #   run: |
+      #     sudo apt-get install libcurl4-openssl-dev
+      #     sudo apt-get install libssl-dev
+      #     sudo apt-get install libzmq3-dev
+      #     sudo pip install python-telegram-bot
 
-      - name: Put the worktree in the runs branch if the latter already exists
-        if: steps.runs-exist.outcome == 'success'
-        run: |
-          rm -r .git
-          mv .targets-runs/.git .
-          rm -r .targets-runs
+      # - name: Cache packages
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ${{ env.RENV_PATHS_ROOT }}
+      #     key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+      #     restore-keys: ${{ runner.os }}-renv-
 
-      - name: Upload latest run
-        run: |
-          git config --local user.name "GitHub Actions"
-          git config --local user.email "actions@github.com"
-          rm -r .gitignore .github/workflows
-          git add --all -- ':!renv'
-          for file in $(git ls-files -mo --exclude=renv)
-          do
-            git add $file
-          done
-          git commit -am "Run pipeline"
-          git push origin targets-runs
+      # - name: Restore packages
+      #   shell: sudo -E Rscript {0}
+      #   run: |
+      #     if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+      #     renv::restore()
 
-      - name: Prepare failure artifact
-        if: failure()
-        run: rm -rf .git .github .targets-files .targets-runs
+      # - name: Restore output files from the previous run
+      #   if: steps.runs-exist.outcome == 'success'
+      #   run: |
+      #     for (dest in scan(".targets-runs/.targets-files", what = character())) {
+      #       source <- file.path(".targets-runs", dest)
+      #       if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
+      #       if (file.exists(source)) file.rename(source, dest)
+      #     }
+      #   shell: sudo -E Rscript {0}
+
+      # - name: Run targets pipeline
+      #   run: targets::tar_make()
+      #   shell: sudo -E Rscript {0}
+
+      # - name: Identify files that the targets pipeline produced
+      #   run:
+      #     git ls-files -mo --exclude=renv > .targets-files
+
+      # - name: Create the runs branch if it does not already exist
+      #   if: steps.runs-exist.outcome != 'success'
+      #   run: git checkout --orphan targets-runs
+
+      # - name: Put the worktree in the runs branch if the latter already exists
+      #   if: steps.runs-exist.outcome == 'success'
+      #   run: |
+      #     rm -r .git
+      #     mv .targets-runs/.git .
+      #     rm -r .targets-runs
+
+      # - name: Upload latest run
+      #   run: |
+      #     git config --local user.name "GitHub Actions"
+      #     git config --local user.email "actions@github.com"
+      #     rm -r .gitignore .github/workflows
+      #     git add --all -- ':!renv'
+      #     for file in $(git ls-files -mo --exclude=renv)
+      #     do
+      #       git add $file
+      #     done
+      #     git commit -am "Run pipeline"
+      #     git push origin targets-runs
+
+      # - name: Prepare failure artifact
+      #   if: failure()
+      #   run: rm -rf .git .github .targets-files .targets-runs
 
       # - name: Post failure artifact
       #   if: failure()
