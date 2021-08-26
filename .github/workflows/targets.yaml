@@ -209,9 +209,11 @@ jobs:
 
       - name: Melt dev with targets
         run: |
-          git fetch
+          sudo git fetch
           git checkout origin/development
-          git clean -f -n
+          git add -A 
+          git stash
+          git pull
           git merge targets-runs --strategy-option ours --allow-unrelated-histories
           git push -u origin development
 
