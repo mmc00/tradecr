@@ -209,6 +209,7 @@ jobs:
 
       - name: Melt dev with targets
         run: |
+          git fetch
           git checkout origin/development
           git clean -f -n
           git merge targets-runs --strategy-option ours --allow-unrelated-histories
