@@ -45,6 +45,9 @@ jobs:
       RENV_PATHS_ROOT: ~/.local/share/renv
       TEMP_PATH: ./temp
       DRIVER_PATH: /usr/local/bin/
+      CHECK_PATH: ./data/check_procomer.csv
+      ITRADECRAPI: ${{ secrets.ITRADECRAPI }}
+      USER_CALL: ${{ secrets.MOLINA_TELEGRAM }}
     steps:
       - uses: browser-actions/setup-chrome@latest
       - name: Set up Chrome
@@ -185,11 +188,7 @@ jobs:
       
       - name: Run bot
         run: 
-          python ./python/telegram_message.py 
-        env:
-          CHECK_PATH: ./data/check_procomer.csv
-          ITRADECRAPI: ${{ secrets.ITRADECRAPI }}
-          USER_CALL: ${{ secrets.MOLINA_TELEGRAM }}
+          sudo -E python ./python/telegram_message.py
 
       - name: Identify files that the targets pipeline produced
         run:
