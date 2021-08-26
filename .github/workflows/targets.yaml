@@ -192,7 +192,7 @@ jobs:
           sudo git config --local user.email "actions@github.com"
           sudo rm -r .gitignore .github/workflows
           sudo git add --all -- ':!renv'
-          for file in $(sudo git ls-files -mo --exclude=renv)
+          for file in $(git ls-files -mo --exclude=renv)
           do
             sudo git add $file
           done
@@ -201,7 +201,7 @@ jobs:
 
       - name: Prepare failure artifact
         if: failure()
-        run: rm -rf .git .github .targets-files .targets-runs
+        run: sudo rm -rf .git .github .targets-files .targets-runs
 
       # - name: Post failure artifact
       #   if: failure()
