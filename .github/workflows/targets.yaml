@@ -91,21 +91,6 @@ jobs:
           sudo python -m pip install --upgrade pip
           sudo pip install selenium
 
-      - name: List files 0
-        run:
-          sudo ls -l ${TEMP_PATH}
-
-      - name: Setting up for temp and data folder
-        run:
-          sudo rm -rf ${TEMP_PATH} \
-          && sudo mkdir ${TEMP_PATH} \
-          && sudo chmod +rwx ${TEMP_PATH} \
-          && sudo mkdir -p ${DATA_PATH} \
-          && sudo chmod +rwx ${DATA_PATH} 
-        env: 
-          TEMP_PATH: ./temp
-          DATA_PATH: ./data
-
       - name: Restore output files from the previous run
         if: steps.runs-exist.outcome == 'success'
         run: |
@@ -115,7 +100,15 @@ jobs:
             if (file.exists(source)) file.rename(source, dest)
           }
         shell: sudo Rscript {0}
-        
+      
+      - name: Setting up for temp and data folder
+        run:
+          sudo rm -rf ${TEMP_PATH} \
+          && sudo mkdir ${TEMP_PATH} \
+          && sudo chmod +rwx ${TEMP_PATH} \
+          && sudo mkdir -p ${DATA_PATH} \
+          && sudo chmod +rwx ${DATA_PATH} 
+
       - name: Python Procomer by country
         run: 
           sudo -E python ./python/proco_pais.py \
