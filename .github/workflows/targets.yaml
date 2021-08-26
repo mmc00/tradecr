@@ -202,6 +202,7 @@ jobs:
 
       - name: Merging master with dev for check
         run: |
+          sudo git fetch
           sudo git checkout development
           sudo git merge master
 
