@@ -100,7 +100,7 @@ comparing_data <- function(new, old, tol = 0.0001) {
     mutate(check = abs(value - value_old) <= tol) %>%
     filter(!check)
 
-  write.csv(data, "data/check_procomer.csv"), row.names = F)
+  write.csv(data, "data/check_procomer.csv", row.names = F)
   return("data/check_procomer.csv")
 }
 
