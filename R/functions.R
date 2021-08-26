@@ -8,7 +8,9 @@ long_country_data <- function(patho, dummy) {
   print("esta es la dumm (NULL)")
   print(dummy)
   date_dummy <- as.character(as.POSIXct(Sys.time()))
-  print("reading")
+  print("check if exists")
+  print(file.exists(patho))
+   print("reading")
   data <- read_excel(path = patho)
   print("error")
   data <- read_excel(path = patho) %>%
