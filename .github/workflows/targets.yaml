@@ -200,6 +200,21 @@ jobs:
           git commit -am "Run pipeline"
           git push origin targets-runs
 
+      - name: Merging master with dev for check
+        run: |
+          sudo git checkout development
+          git merge master
+
+      - name: Melt targets-runs with dev
+        run: |
+          sudo git checkout targets-runs
+          git merge development
+
+      - name: Match dev with master
+        run: |
+          sudo git checkout development
+          git merge master
+
       - name: Prepare failure artifact
         if: failure()
         run: sudo rm -rf .git .github .targets-files .targets-runs
