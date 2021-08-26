@@ -99,7 +99,7 @@ jobs:
           sudo rm -rf ${TEMP_PATH} \
           && sudo mkdir ${TEMP_PATH} \
           && sudo chmod +rwx ${TEMP_PATH} \
-          && sudo mkdir ${DATA_PATH} \
+          && sudo mkdir -p ${DATA_PATH} \
           && sudo chmod +rwx ${DATA_PATH} 
         env: 
           TEMP_PATH: ./temp
