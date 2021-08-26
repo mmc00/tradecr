@@ -23,7 +23,7 @@ long_country_data <- function(patho, dummy) {
 }
 
 long_chapter_data <- function(path) {
-  
+  # primera columna mal
   data <- read_excel(path) %>%
     rename("chapter" = "...1") %>%
     filter(chapter != "Grand Total") %>%
