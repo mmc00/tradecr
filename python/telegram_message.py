@@ -7,18 +7,11 @@ file_path = os.getenv('CHECK_PATH')
 api_key = os.getenv('ITRADECRAPI')
 user_id = os.getenv('USER_CALL')
 
-print("file")
-print(file_path)
-print("api")
-print(api_key)
-print("user")
-print(user_id)
-
-
 with open(file_path) as fp:
     reader = csv.reader(fp, delimiter=",", quotechar='"')
     data_read = [row for row in reader]
 
+print(len(data_read))
 # set up bot 
 bot = telegram.Bot(token=api_key)
 # send message if file has more than one row  
