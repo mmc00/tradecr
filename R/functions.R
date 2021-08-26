@@ -40,13 +40,10 @@ long_chapter_data <- function(path) {
 append_data <- function(data, name){
   
   relative_path <- paste0("data", "/", name)
-  print(relative_path)
-  print("ver estado del path")
   print(file.exists(relative_path))
   if (file.exists(relative_path)) {
     write.table(data, file = relative_path, append = T, row.names = F)
   } else{
-    print("check si esta dentro de archivo nuevo")
     write.csv(data, file = relative_path, row.names = F)
   }
   return(relative_path)

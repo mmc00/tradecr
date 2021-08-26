@@ -180,6 +180,9 @@ jobs:
         run: targets::tar_make()
         shell: sudo -E Rscript {0}
 
+      - name: Check files
+        run: sudo ls -l ./data
+
       - name: Identify files that the targets pipeline produced
         run:
           sudo git ls-files -mo --exclude=renv > .targets-files
