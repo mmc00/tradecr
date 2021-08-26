@@ -28,7 +28,7 @@ time.sleep(3)
 # Manual 6
 manual6 = browser.find_element_by_id('ASPxRoundPanel2_RBValorST')
 manual6.click()
-time.sleep(3)
+time.sleep(4)
 # Region
 region = browser.find_element_by_id('ASPxRoundPanel2_CBRegion')
 region.click()
