@@ -200,12 +200,12 @@ jobs:
           git commit -am "Run pipeline"
           git push origin targets-runs
 
-      - name: Merging master with dev for check
-        run: |
-          git fetch
-          git checkout development
-          git merge origin/master
-          git push -u origin development
+      # - name: Merging master with dev for check
+      #   run: |
+      #     git fetch
+      #     git checkout development
+      #     git merge origin/master
+      #     git push -u origin development
 
       - name: Melt dev with targets
         run: |
