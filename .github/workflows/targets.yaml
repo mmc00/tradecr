@@ -208,11 +208,6 @@ jobs:
           rm -r .gitignore .github/workflows
           git add --all -- ':!renv'
           git status
-      # for file in $(git ls-files -mo --exclude=renv)
-      # do
-      #   git add $file
-      #   echo $file
-      # done
           git commit -am "Run pipeline"
           git push origin targets-runs
 
