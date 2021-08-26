@@ -11,12 +11,12 @@ with open(file_path) as fp:
     reader = csv.reader(fp, delimiter=",", quotechar='"')
     data_read = [row for row in reader]
 
-print(len(data_read))
 # set up bot 
 bot = telegram.Bot(token=api_key)
 # send message if file has more than one row  
 if(len(data_read) > 1):
-  bot.send_message(chat_id=user_id, text= "Everything its right!")
-  print("Everything its right!")
-else:
+  bot.send_message(chat_id=user_id, text="Everything its bad!")
   bot.send_message(chat_id=user_id, text= data_read)
+else:
+  bot.send_message(chat_id=user_id, text="Everything its right!")
+  print("Everything its right!")
