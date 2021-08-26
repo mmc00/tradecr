@@ -53,10 +53,12 @@ append_data <- function(data, name){
   print(name)
   relative_path <- paste0("data", "/", name)
   print(relative_path)
+  print("ver estado del path")
+  print(file.exists(relative_path))
   if (file.exists(relative_path)) {
-    write.table(data, relative_path, append = T, row.names = F)
+    write.table(data, file = relative_path, append = T, row.names = F)
   } else{
-    write.csv(data, relative_path, row.names = F)
+    write.csv(data, file = relative_path, row.names = F)
   }
   return(relative_path)
 }
