@@ -104,7 +104,17 @@ jobs:
         env: 
           TEMP_PATH: ./temp
           DATA_PATH: ./data
-      
+
+      - name: Restore output files from the previous run
+        if: steps.runs-exist.outcome == 'success'
+        run: |
+          for (dest in scan(".targets-runs/.targets-files", what = character())) {
+            source <- file.path(".targets-runs", dest)
+            if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
+            if (file.exists(source)) file.rename(source, dest)
+          }
+        shell: sudo Rscript {0}
+        
       - name: Python Procomer by country
         run: 
           sudo -E python ./python/proco_pais.py \
@@ -148,17 +158,17 @@ jobs:
         env: 
           TEMP_PATH: ./temp
         
-      - name: Restore output files from the previous run
-        if: steps.runs-exist.outcome == 'success'
-        run: |
-            nfiles <- scan(".targets-runs/.targets-files", what = character())
-            nfiles <- nfiles[!grepl("temp/", nfiles)]
-            for (dest in nfiles) {
-              source <- file.path(".targets-runs", dest)
-              if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
-              if (file.exists(source)) file.rename(source, dest)
-              }
-        shell: sudo -E Rscript {0}
+      # - name: Restore output files from the previous run
+      #   if: steps.runs-exist.outcome == 'success'
+      #   run: |
+      #       nfiles <- scan(".targets-runs/.targets-files", what = character())
+      #       nfiles <- nfiles[!grepl("temp/", nfiles)]
+      #       for (dest in nfiles) {
+      #         source <- file.path(".targets-runs", dest)
+      #         if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
+      #         if (file.exists(source)) file.rename(source, dest)
+      #         }
+      #   shell: sudo -E Rscript {0}
 
       - name: List files 2
         run:
@@ -181,23 +191,23 @@ jobs:
       - name: Put the worktree in the runs branch if the latter already exists
         if: steps.runs-exist.outcome == 'success'
         run: |
-          sudo rm -r .git
-          sudo mv .targets-runs/.git .
-          sudo rm -r .targets-runs
+          sudo -E rm -r .git
+          sudo -E mv .targets-runs/.git .
+          sudo -E rm -r .targets-runs
 
       - name: Upload latest run
         run: |
-          sudo git config advice.addIgnoredFile false
-          sudo git config --local user.name "GitHub Actions"
-          sudo git config --local user.email "actions@github.com"
-          sudo rm -r .gitignore .github/workflows
-          sudo git add --all -- ':!renv'
+          sudo -E git config advice.addIgnoredFile false
+          sudo -E git config --local user.name "GitHub Actions"
+          sudo -E git config --local user.email "actions@github.com"
+          sudo -E rm -r .gitignore .github/workflows
+          sudo -E git add --all -- ':!renv'
           for file in $(git ls-files -mo --exclude=renv)
           do
-            sudo git add $file
+            sudo -E git add $file
           done
-          sudo git commit -am "Run pipeline"
-          sudo git push origin targets-runs
+          sudo -E git commit -am "Run pipeline"
+          sudo -E git push origin targets-runs
 
       - name: Prepare failure artifact
         if: failure()
