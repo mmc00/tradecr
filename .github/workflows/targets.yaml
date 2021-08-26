@@ -191,29 +191,28 @@ jobs:
         if: steps.runs-exist.outcome != 'success'
         run: sudo git checkout --orphan targets-runs
 
-      - name: View files
-        run: sudo cat .targets-files
-
       - name: Put the worktree in the runs branch if the latter already exists
         if: steps.runs-exist.outcome == 'success'
         run: |
           sudo -E rm -r .git
           sudo -E mv .targets-runs/.git .
           sudo -E rm -r .targets-runs
+      
+      - name: View files
+        run: sudo cat .targets-files
 
       - name: Upload latest run
         run: |
-          sudo -E git config advice.addIgnoredFile false
-          sudo -E git config --local user.name "GitHub Actions"
-          sudo -E git config --local user.email "actions@github.com"
-          sudo -E rm -r .gitignore .github/workflows
-          sudo -E git add --all -- ':!renv'
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          rm -r .gitignore .github/workflows
+          git add --all -- ':!renv'
           for file in $(git ls-files -mo --exclude=renv)
           do
-            sudo -E git add $file
+            git add $file
           done
-          sudo -E git commit -am "Run pipeline"
-          sudo -E git push origin targets-runs
+          git commit -am "Run pipeline"
+          git push origin targets-runs
 
       - name: Prepare failure artifact
         if: failure()
