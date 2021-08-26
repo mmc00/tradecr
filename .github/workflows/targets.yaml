@@ -184,10 +184,12 @@ jobs:
         run: sudo ls -l ./data
       
       - name: Run bot
-        run: sudo -E python ./python/telegram_message.py \
+        run: 
+          python ./python/telegram_message.py 
         env:
-          TEMP_PATH: ./temp
-          DRIVER_PATH: /usr/local/bin/chromedriver
+          CHECK_PATH: ./data/check_procomer.csv
+          ITRADECRAPI: ${{ secrets.ITRADECRAPI }}
+          USER_CALL: ${{ secrets.MOLINA_TELEGRAM }}
 
       - name: Identify files that the targets pipeline produced
         run:
