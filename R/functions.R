@@ -44,14 +44,14 @@ long_chapter_data <- function(path) {
     pivot_longer(-chapter, names_to = "year") %>%
     group_by(chapter, year) %>%
     summarise(value = sum(value, na.rm = T), .groups = "drop") %>% 
-    mutate(time = as.POSIXlt(Sys.time()))
+    mutate(time = Sys.time())
   
   return(data)
 }
 
 append_data <- function(data, name){
   print(name)
-  relative_path <- here("data", name)
+  relative_path <- paste0("data", "/", name)
   print(relative_path)
   if (file.exists(relative_path)) {
     write.table(data, relative_path, append = T, row.names = F)

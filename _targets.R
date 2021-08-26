@@ -77,12 +77,9 @@ list(
   tar_target(
     old.data,
     reading_old_data(
-      here(
-        "data",
-        "historical_chapter_data_procomer.csv"
-      ),
-      appending.capdata
-    )
+        "data/historical_chapter_data_procomer.csv",
+        appending.capdata
+      )
   ),
   tar_target(
     sort.old.data,
