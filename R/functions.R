@@ -1,17 +1,17 @@
-long_country_data <- function(path, dummy) {
+long_country_data <- function(patho, dummy) {
   print("este el path")
-  print(path)
+  print(patho)
   print("path class")
-  print(class(path))
+  print(class(patho))
   print("print type")
-  print(typeof(path))
+  print(typeof(patho))
   print("esta es la dumm (NULL)")
   print(dummy)
   date_dummy <- as.character(as.POSIXct(Sys.time()))
   print("reading")
-  data <- read_excel(path = path)
+  data <- read_excel(path = patho)
   print("error")
-  data <- read_excel(path = path) %>%
+  data <- read_excel(path = patho) %>%
     rename("country" = "...1") %>%
     # fixing uk
     mutate(
