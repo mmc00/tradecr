@@ -72,7 +72,7 @@ jobs:
       
       - name: Check if previous runs exists
         id: runs-exist
-        run: git ls-remote --exit-code --heads origin targets-runs
+        run: sudo git ls-remote --exit-code --heads origin targets-runs
         continue-on-error: true
 
       - name: Checkout previous run
