@@ -94,13 +94,16 @@ jobs:
         env: 
           TEMP_PATH: ./temp
 
-      - name: Setting up for temp folder
+      - name: Setting up for temp and data folder
         run:
           sudo rm -rf ${TEMP_PATH} \
           && sudo mkdir ${TEMP_PATH} \
-          && sudo chmod +rwx ${TEMP_PATH}
+          && sudo chmod +rwx ${TEMP_PATH} \
+          && sudo mkdir ${DATA_PATH} \
+          && sudo chmod +rwx ${DATA_PATH} 
         env: 
           TEMP_PATH: ./temp
+          DATA_PATH: ./data
       
       - name: Python Procomer by country
         run: 

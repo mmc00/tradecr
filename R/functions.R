@@ -58,6 +58,7 @@ append_data <- function(data, name){
   if (file.exists(relative_path)) {
     write.table(data, file = relative_path, append = T, row.names = F)
   } else{
+    print("check si esta dentro de archivo nuevo")
     write.csv(data, file = relative_path, row.names = F)
   }
   return(relative_path)
