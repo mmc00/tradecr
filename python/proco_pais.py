@@ -32,24 +32,24 @@ time.sleep(4)
 # Region
 region = browser.find_element_by_id('ASPxRoundPanel2_CBRegion')
 region.click()
-time.sleep(3)
+time.sleep(4)
 # Country
 pais = browser.find_element_by_id('ASPxRoundPanel2_CBPais_S_D')
 pais.click()
-time.sleep(3)
+time.sleep(4)
 # Check years
 ## check years
 years = browser.find_element_by_id('ASPxPivotGrid1_sortedpgHeader5F')
 years.click()
-time.sleep(3)
+time.sleep(4)
 ## select all years
 allyears = browser.find_element_by_id('ASPxPivotGrid1FTRIAll')
 allyears.click()
-time.sleep(3)
+time.sleep(4)
 ## apply changes
 appyears = browser.find_element_by_id('ASPxPivotGrid1_FPWOK_B')
 appyears.click()
-time.sleep(3)
+time.sleep(4)
 # download
 downloadclick = browser.find_element_by_id('ASPxRoundPanel3_ImageButton3')
 downloadclick.click()
