@@ -118,33 +118,32 @@ jobs:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver 
       
+      - name: Install Linux system dependencies 4 targets and telegram
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libssl-dev
+          sudo apt-get install libzmq3-dev
+          sudo pip install python-telegram-bot
+
+      - name: Cache packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: ${{ runner.os }}-renv-
+
+      - name: Restore packages
+        shell: sudo -E Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+
       - name: List files 1
         run:
           sudo ls -l ${TEMP_PATH}
         env: 
           TEMP_PATH: ./temp
-          
-      # - name: Install Linux system dependencies 4 targets and telegram
-      #   if: runner.os == 'Linux'
-      #   run: |
-      #     sudo apt-get install libcurl4-openssl-dev
-      #     sudo apt-get install libssl-dev
-      #     sudo apt-get install libzmq3-dev
-      #     sudo pip install python-telegram-bot
-
-      # - name: Cache packages
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ${{ env.RENV_PATHS_ROOT }}
-      #     key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-      #     restore-keys: ${{ runner.os }}-renv-
-
-      # - name: Restore packages
-      #   shell: sudo -E Rscript {0}
-      #   run: |
-      #     if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-      #     renv::restore()
-
       # - name: Restore output files from the previous run
       #   if: steps.runs-exist.outcome == 'success'
       #   run: |
