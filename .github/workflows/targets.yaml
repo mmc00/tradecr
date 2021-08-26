@@ -202,18 +202,18 @@ jobs:
 
       - name: Merging master with dev for check
         run: |
-        sudo git checkout development
-        git merge master
+          sudo git checkout development
+          git merge master
 
       - name: Melt targets-runs with dev
         run: |
-        sudo git checkout targets-runs
-        git merge development
+          sudo git checkout targets-runs
+          git merge development
 
       - name: Match dev with master
         run: |
-        sudo git checkout development
-        git merge master
+          sudo git checkout development
+          git merge master
 
       - name: Prepare failure artifact
         if: failure()
