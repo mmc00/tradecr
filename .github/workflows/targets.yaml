@@ -182,6 +182,12 @@ jobs:
 
       - name: Check files
         run: sudo ls -l ./data
+      
+      - name: Run bot
+        run: sudo -E python ./python/telegram_message.py \
+        env:
+          TEMP_PATH: ./temp
+          DRIVER_PATH: /usr/local/bin/chromedriver
 
       - name: Identify files that the targets pipeline produced
         run:
