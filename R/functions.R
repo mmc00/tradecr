@@ -1,18 +1,6 @@
 long_country_data <- function(patho, dummy) {
-  print("este el path")
-  print(patho)
-  print("path class")
-  print(class(patho))
-  print("print type")
-  print(typeof(patho))
-  print("esta es la dumm (NULL)")
-  print(dummy)
+  
   date_dummy <- as.character(as.POSIXct(Sys.time()))
-  print("check if exists")
-  print(file.exists(patho))
-   print("reading")
-  data <- read_excel(path = patho)
-  print("error")
   data <- read_excel(path = patho) %>%
     rename("country" = "...1") %>%
     # fixing uk
@@ -35,7 +23,7 @@ long_country_data <- function(patho, dummy) {
 }
 
 long_chapter_data <- function(path) {
-  print(path)
+  
   data <- read_excel(path) %>%
     rename("chapter" = "...1") %>%
     filter(chapter != "Grand Total") %>%
@@ -50,7 +38,7 @@ long_chapter_data <- function(path) {
 }
 
 append_data <- function(data, name){
-  print(name)
+  
   relative_path <- paste0("data", "/", name)
   print(relative_path)
   print("ver estado del path")
@@ -112,7 +100,7 @@ comparing_data <- function(new, old, tol = 0.0001) {
     mutate(check = abs(value - value_old) <= tol) %>%
     filter(!check)
 
-  write.csv(data, here("data", "check_procomer.csv"), row.names = F)
-  return(here("data", "check_procomer.csv"))
+  write.csv(data, "data/check_procomer.csv"), row.names = F)
+  return("data/check_procomer.csv")
 }
 
