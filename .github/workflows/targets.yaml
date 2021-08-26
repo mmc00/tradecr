@@ -185,23 +185,23 @@ jobs:
           sudo mv .targets-runs/.git .
           sudo rm -r .targets-runs
 
-      - name: Upload latest run
-        run: |
-          sudo git config advice.addIgnoredFile false
-          sudo git config --local user.name "GitHub Actions"
-          sudo git config --local user.email "actions@github.com"
-          sudo rm -r .gitignore .github/workflows
-          sudo git add --all -- ':!renv'
-          for file in $(git ls-files -mo --exclude=renv)
-          do
-            sudo git add $file
-          done
-          sudo git commit -am "Run pipeline"
-          sudo git push origin targets-runs
+      # - name: Upload latest run
+      #   run: |
+      #     sudo git config advice.addIgnoredFile false
+      #     sudo git config --local user.name "GitHub Actions"
+      #     sudo git config --local user.email "actions@github.com"
+      #     sudo rm -r .gitignore .github/workflows
+      #     sudo git add --all -- ':!renv'
+      #     for file in $(git ls-files -mo --exclude=renv)
+      #     do
+      #       sudo git add $file
+      #     done
+      #     sudo git commit -am "Run pipeline"
+      #     sudo git push origin targets-runs
 
-      - name: Prepare failure artifact
-        if: failure()
-        run: sudo rm -rf .git .github .targets-files .targets-runs
+      # - name: Prepare failure artifact
+      #   if: failure()
+      #   run: sudo rm -rf .git .github .targets-files .targets-runs
 
       # - name: Post failure artifact
       #   if: failure()
