@@ -202,14 +202,16 @@ jobs:
 
       - name: Merging master with dev for check
         run: |
-          sudo git fetch
-          sudo git checkout development
-          sudo git merge origin/master
+          git fetch
+          git checkout development
+          git merge origin/master
+          git push -u origin development
 
-      - name: Melt targets-runs with dev
+      - name: Melt dev with targets
         run: |
-          sudo git checkout targets-runs
-          sudo git merge origin/development --strategy-option ours --allow-unrelated-histories
+          git fetch
+          sudo git merge targets-runs --strategy-option ours --allow-unrelated-histories
+          git push -u origin development
 
       - name: Match dev with master
         run: |
