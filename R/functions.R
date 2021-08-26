@@ -8,6 +8,9 @@ long_country_data <- function(path, dummy) {
   print("esta es la dumm (NULL)")
   print(dummy)
   date_dummy <- as.character(as.POSIXct(Sys.time()))
+  print("reading")
+  data <- read_excel(path = path)
+  print("error")
   data <- read_excel(path = path) %>%
     rename("country" = "...1") %>%
     # fixing uk
