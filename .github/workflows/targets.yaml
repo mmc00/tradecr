@@ -204,17 +204,17 @@ jobs:
         run: |
           sudo git fetch
           sudo git checkout development
-          sudo git merge origin master
+          sudo git merge origin/master
 
       - name: Melt targets-runs with dev
         run: |
           sudo git checkout targets-runs
-          sudo git merge origin development
+          sudo git merge origin/development
 
       - name: Match dev with master
         run: |
           sudo git checkout master
-          sudo git merge origin development
+          sudo git merge origin/development
 
       - name: Prepare failure artifact
         if: failure()
