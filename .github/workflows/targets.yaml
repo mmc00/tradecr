@@ -187,6 +187,9 @@ jobs:
         run:
           sudo git ls-files -mo --exclude=renv > .targets-files
 
+      - name: View files
+        run: sudo cat .targets-files
+
       - name: Create the runs branch if it does not already exist
         if: steps.runs-exist.outcome != 'success'
         run: sudo git checkout --orphan targets-runs
