@@ -90,7 +90,7 @@ jobs:
 
       - name: Setting up for temp folder
         run:
-          rm -rf ${TEMP_PATH} \
+          sudo rm -rf ${TEMP_PATH} \
           && sudo mkdir ${TEMP_PATH} \
           && sudo chmod +rwx ${TEMP_PATH}
         env: 
