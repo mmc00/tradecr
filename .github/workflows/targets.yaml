@@ -215,6 +215,7 @@ jobs:
         run: |
           sudo git checkout master
           sudo git merge origin/development
+          sudo git push -u origin master 
 
       - name: Prepare failure artifact
         if: failure()
