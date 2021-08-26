@@ -107,7 +107,10 @@ jobs:
           && sudo mkdir ${TEMP_PATH} \
           && sudo chmod +rwx ${TEMP_PATH} \
           && sudo mkdir -p ${DATA_PATH} \
-          && sudo chmod +rwx ${DATA_PATH} 
+          && sudo chmod +rwx ${DATA_PATH}
+        env: 
+          TEMP_PATH: ./temp
+          DATA_PATH: ./data
 
       - name: Python Procomer by country
         run: 
