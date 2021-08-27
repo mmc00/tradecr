@@ -212,8 +212,8 @@ jobs:
           sudo git fetch
           sudo git stash
           sudo git switch development
-          git merge targets-runs --strategy-option ours --allow-unrelated-histories
-          git push -u origin development
+          sudo git merge targets-runs --strategy-option ours --allow-unrelated-histories
+          sudo git push -u origin development
 
       - name: Match dev with master
         run: |
