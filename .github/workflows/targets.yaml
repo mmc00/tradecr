@@ -217,7 +217,7 @@ jobs:
 
       - name: Match dev with master
         run: |
-          sudo git fetch --unshallow
+          sudo git fetch
           sudo git checkout master
           sudo git pull
           sudo git merge origin/development
