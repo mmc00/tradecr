@@ -210,10 +210,9 @@ jobs:
       - name: Melt dev with targets
         run: |
           sudo git fetch
-          git checkout origin/development
-          git add -A 
-          git stash
-          git pull
+          sudo git checkout origin/development
+          git gc
+          git reset
           git merge targets-runs --strategy-option ours --allow-unrelated-histories
           git push -u origin development
 
