@@ -209,11 +209,11 @@ jobs:
 
       - name: Melt dev with targets
         run: |
-          sudo git fetch
-          sudo git stash
-          sudo git switch development
-          sudo git merge targets-runs --strategy-option ours --allow-unrelated-histories
-          sudo git push -u origin development
+          sudo git fetch --unshallow
+          sudo git checkout dev
+          sudo git pull
+          sudo git merge --no-ff targets-runs --strategy-option ours --allow-unrelated-histories
+          sudo git push
 
       - name: Match dev with master
         run: |
