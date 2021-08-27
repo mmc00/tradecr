@@ -211,9 +211,7 @@ jobs:
         run: |
           sudo git fetch
           sudo git stash
-          sudo git switch origin/development
-          git gc
-          git reset
+          sudo git switch development
           git merge targets-runs --strategy-option ours --allow-unrelated-histories
           git push -u origin development
 
