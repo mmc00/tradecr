@@ -6,16 +6,18 @@ library(here)
 here::i_am("_targets.R")
 sapply(list.files(here("R"), full.names = T), source)
 options(tidyverse.quiet = TRUE)
-tar_option_set(packages = c(
-  "tidyverse",
-  "here",
-  "httr",
-  "xml2",
-  "XML",
-  "readxl",
-  "lubridate"
-),
-debug = "raw.imp.data") # add packages here
+tar_option_set(
+  packages = c(
+    "tidyverse",
+    "here",
+    "httr",
+    "xml2",
+    "XML",
+    "readxl",
+    "lubridate"
+  ),
+  debug = "raw.imp.data"
+) # add packages here
 # params
 download_path <- normalizePath(here("temp"))
 temp_path <- here("temp")
@@ -27,7 +29,8 @@ list(
   # setting main path
   tar_target(
     main_path,
-    here::i_am("_targets.R")
+    here::i_am("_targets.R"),
+    cue = tar_cue_force(TRUE)
   ),
   # PROCOMER flow (exports)
   ## path for files
@@ -50,11 +53,17 @@ list(
     temp.capdata.long,
     long_chapter_data(temp.capdata.path)
   ),
+  ## check if old data exist
+  tar_target(
+    checking.old.data,
+    check_if_exist("historical_chapter_data_procomer.csv")
+  ),
   ## reading last data
   tar_target(
     old.data,
     reading_old_data(
-      "data/historical_chapter_data_procomer.csv"
+      "data/historical_chapter_data_procomer.csv",
+      checking.old.data
     )
   ),
   ## adding to dataset
@@ -112,12 +121,18 @@ list(
       study_year = 2021
     )
   ),
+  ## Check old data
+  tar_target(
+    checking.old.imp.data,
+    check_if_exist("historical_imp_data_bccr.csv")
+  ),
   ## read old data
   tar_target(
     old.imp.data,
     reading_old_data(
-      "data/historical_imp_data_bccr.csv"
-    )
+      "data/historical_imp_data_bccr.csv",
+      checking.old.imp.data
+    ),
   ),
   ## append data
   tar_target(
