@@ -48,6 +48,8 @@ jobs:
       CHECK_PATH: ./data/check_procomer.csv
       ITRADECRAPI: ${{ secrets.ITRADECRAPI }}
       USER_CALL: ${{ secrets.MOLINA_TELEGRAM }}
+      BCCR_USER: ${{ secrets.BCCR_USER }}
+      BCCR_PASS: ${{ secrets.BCCR_PASS }}
     steps:
       - uses: browser-actions/setup-chrome@latest
       - name: Set up Chrome
@@ -163,7 +165,7 @@ jobs:
       
       - name: Run targets pipeline
         run: targets::tar_make()
-        shell: sudo -E Rscript {0}
+        shell: sudo -E Rscript {0} 
 
       - name: Check files
         run: sudo ls -l ./data
