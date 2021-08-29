@@ -48,6 +48,8 @@ jobs:
       CHECK_PATH: ./data/check_procomer.csv
       ITRADECRAPI: ${{ secrets.ITRADECRAPI }}
       USER_CALL: ${{ secrets.MOLINA_TELEGRAM }}
+      BCCR_USER: ${{ secrets.BCCR_USER }}
+      BCCR_PASS: ${{ secrets.BCCR_PASS }}
     steps:
       - uses: browser-actions/setup-chrome@latest
       - name: Set up Chrome
@@ -163,7 +165,7 @@ jobs:
       
       - name: Run targets pipeline
         run: targets::tar_make()
-        shell: sudo -E Rscript {0}
+        shell: sudo -E Rscript {0} 
 
       - name: Check files
         run: sudo ls -l ./data
@@ -200,28 +202,32 @@ jobs:
           git commit -am "Run pipeline"
           git push origin targets-runs
 
-      - name: Merging master with dev for check
-        run: |
-          git fetch
-          git checkout development
-          git merge origin/master
-          git push -u origin development
+      # - name: Merging master with dev for check
+      #   run: |
+      #     git fetch
+      #     git checkout development
+      #     git merge origin/master
+      #     git push -u origin development
 
       - name: Melt dev with targets
         run: |
-          git checkout development
-          git merge targets-runs --strategy-option ours --allow-unrelated-histories
-          git push -u origin development
+          sudo git fetch --unshallow
+          sudo git checkout development
+          sudo git pull
+          sudo git merge --no-ff targets-runs --strategy-option ours --allow-unrelated-histories
+          sudo git push
 
       - name: Match dev with master
         run: |
-          git checkout master
-          git merge origin/development
-          git push -u origin master 
+          sudo git fetch
+          sudo git checkout master
+          sudo git pull
+          sudo git merge origin/development
+          sudo git push -u origin master 
 
-      - name: Prepare failure artifact
-        if: failure()
-        run: sudo rm -rf .git .github .targets-files .targets-runs
+      # - name: Prepare failure artifact
+      #   if: failure()
+      #   run: sudo rm -rf .git .github .targets-files .targets-runs
 
       # - name: Post failure artifact
       #   if: failure()
