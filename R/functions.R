@@ -41,32 +41,40 @@ long_chapter_data <- function(path) {
   return(data)
 }
 
-check_if_exist <- function(name) {
-  relative_path <- paste0("data", "/", name)
-  file.exists(relative_path)
+check_if_exist <- function(name, kind) {
+  if (file.exists(name)) {
+    name
+  } else {
+    if(kind == "month"){
+      columns_names <- c("value", "month", "year", "time")
+    } else{
+      columns_names <- c(kind, "year","value","time")
+    }
+    data <- data.frame(matrix(ncol = length(columns_names ), nrow = 0))
+    colnames(data) <- columns_names
+    write.table(data, file = name, sep = "|", row.names = F,
+                col.names = T)
+    name
+  }
 }
 
-append_data <- function(data, name, dummy = NULL) {
-  relative_path <- paste0("data", "/", name)
+append_data <- function(data, relative_path, dummy = NULL) {
   print(file.exists(relative_path))
   if (file.exists(relative_path)) {
-    write.table(data, file = relative_path, append = T, row.names = F)
+    suppressWarnings({write.table(data, file = relative_path, sep = "|", append = T, row.names = F,
+                                  col.names = F)})
   } else {
-    write.csv(data, file = relative_path, row.names = F)
+    write.table(data, file = relative_path, sep = "|", row.names = F, col.names = T)
   }
   return(relative_path)
 }
 
 reading_old_data <- function(path, dummy) {
-  if (dummy) {
-    read.csv(path)
-  } else {
-    dummy
-  }
+    read.csv(path, sep = "|", header = T)
 }
 
 last_old_data <- function(data, dummy = NULL) {
-  if (!(is.logical(data) & !data)) {
+  if (nrow(data) > 0) {
     id_date <- data %>%
       mutate(time = lubridate::as_date(time)) %>%
       mutate(
@@ -88,14 +96,12 @@ last_old_data <- function(data, dummy = NULL) {
       filter(time %in% id_date) %>%
       group_by(year) %>%
       summarise(value_old = sum(value, na.rm = T), .groups = "drop")
-  } else {
-    data <- FALSE
   }
   return(data)
 }
 
 last_old_data_month <- function(data, dummy = NULL) {
-  if (!(is.logical(data) & !data)) {
+  if (nrow(data) > 0) {
     id_date <- data %>%
       mutate(time = lubridate::as_date(time)) %>%
       mutate(
@@ -117,8 +123,6 @@ last_old_data_month <- function(data, dummy = NULL) {
       filter(time %in% id_date) %>%
       group_by(year, month) %>%
       summarise(value_old = sum(value, na.rm = T), .groups = "drop")
-  } else {
-    data <- FALSE
   }
   return(data)
 }
@@ -140,7 +144,7 @@ last_new_data_month <- function(data) {
 }
 
 comparing_data <- function(new, old, tol = 0.0001) {
-  if (!(is.logical(old) & !old)) {
+  if (nrow(old) > 0) {
     data <- full_join(new %>%
       mutate(year = as.numeric(year)),
     old %>%
@@ -156,12 +160,15 @@ comparing_data <- function(new, old, tol = 0.0001) {
       filter(!check)
   }
 
-  write.csv(data, "data/check_procomer.csv", row.names = F)
+  write.table(data, "data/check_procomer.csv",
+            sep = "|",
+            row.names = F,
+            col.names = T)
   return("data/check_procomer.csv")
 }
 
 comparing_data_month <- function(new, old, tol = 0.0001) {
-  if (!(is.logical(old) & !old)) {
+  if (nrow(old) > 0) {
     data <- full_join(new %>%
       mutate(year = as.numeric(year)) %>%
       mutate(month = as.numeric(month)),
@@ -173,7 +180,10 @@ comparing_data_month <- function(new, old, tol = 0.0001) {
       mutate(check = abs(value - value_old) <= tol) %>%
       filter(!check)
 
-    write.csv(data, "data/check_bccr.csv", row.names = F)
+    write.table(data, "data/check_bccr.csv",
+              sep = "|",
+              row.names = F,
+              col.names = T)
   } else {
     data <- new %>%
       mutate(value_old = value) %>%

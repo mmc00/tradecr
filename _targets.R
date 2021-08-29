@@ -16,7 +16,7 @@ tar_option_set(
     "readxl",
     "lubridate"
   ),
-  debug = "raw.imp.data"
+  debug = "sort.old.data"
 ) # add packages here
 # params
 download_path <- normalizePath(here("temp"))
@@ -53,34 +53,44 @@ list(
     temp.capdata.long,
     long_chapter_data(temp.capdata.path)
   ),
-  ## check if old data exist
+  ## check if data exist
+  ### chapter
   tar_target(
-    checking.old.data,
-    check_if_exist("historical_chapter_data_procomer.csv")
+    checking.old.chapter.data,
+    check_if_exist("data/historical_chapter_data_procomer.csv",
+                   c("chapter")),
+    format = "file"
+  ),
+  ### country
+  tar_target(
+    checking.old.country.data,
+    check_if_exist("data/historical_country_data_procomer.csv",
+                   c("country")),
+    format = "file"
   ),
   ## reading last data
   tar_target(
     old.data,
     reading_old_data(
-      "data/historical_chapter_data_procomer.csv",
-      checking.old.data
+      checking.old.chapter.data,
     )
   ),
   ## adding to dataset
+  ### chapter
   tar_target(
     appending.condata,
     append_data(
       temp.condata.long,
-      "historical_country_data_procomer.csv"
+      checking.old.country.data,
     ),
     format = "file"
   ),
+  ### country
   tar_target(
     appending.capdata,
     append_data(
       temp.capdata.long,
-      "historical_chapter_data_procomer.csv",
-      old.data
+      checking.old.chapter.data
     ),
     format = "file"
   ),
@@ -119,18 +129,20 @@ list(
     getting_agg_imports(raw.imp.data,
       study_month = 12,
       study_year = 2021
-    )
+    ),
+    cue = tar_cue_force(TRUE)
   ),
   ## Check old data
   tar_target(
     checking.old.imp.data,
-    check_if_exist("historical_imp_data_bccr.csv")
+    check_if_exist("data/historical_imp_data_bccr.csv",
+                   c("month")),
+    format = "file"
   ),
   ## read old data
   tar_target(
     old.imp.data,
     reading_old_data(
-      "data/historical_imp_data_bccr.csv",
       checking.old.imp.data
     ),
   ),
@@ -139,8 +151,7 @@ list(
     appending.impdata,
     append_data(
       newimp.agg.data,
-      "historical_imp_data_bccr.csv",
-      old.imp.data
+      checking.old.imp.data
     ),
     format = "file"
   ),
