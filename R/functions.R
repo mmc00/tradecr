@@ -45,15 +45,17 @@ check_if_exist <- function(name, kind) {
   if (file.exists(name)) {
     name
   } else {
-    if(kind == "month"){
+    if (kind == "month") {
       columns_names <- c("value", "month", "year", "time")
-    } else{
-      columns_names <- c(kind, "year","value","time")
+    } else {
+      columns_names <- c(kind, "year", "value", "time")
     }
-    data <- data.frame(matrix(ncol = length(columns_names ), nrow = 0))
+    data <- data.frame(matrix(ncol = length(columns_names), nrow = 0))
     colnames(data) <- columns_names
-    write.table(data, file = name, sep = "|", row.names = F,
-                col.names = T)
+    write.table(data,
+      file = name, sep = "|", row.names = F,
+      col.names = T
+    )
     name
   }
 }
@@ -61,8 +63,12 @@ check_if_exist <- function(name, kind) {
 append_data <- function(data, relative_path, dummy = NULL) {
   print(file.exists(relative_path))
   if (file.exists(relative_path)) {
-    suppressWarnings({write.table(data, file = relative_path, sep = "|", append = T, row.names = F,
-                                  col.names = F)})
+    suppressWarnings({
+      write.table(data,
+        file = relative_path, sep = "|", append = T, row.names = F,
+        col.names = F
+      )
+    })
   } else {
     write.table(data, file = relative_path, sep = "|", row.names = F, col.names = T)
   }
@@ -70,7 +76,7 @@ append_data <- function(data, relative_path, dummy = NULL) {
 }
 
 reading_old_data <- function(path, dummy) {
-    read.csv(path, sep = "|", header = T)
+  read.csv(path, sep = "|", header = T)
 }
 
 last_old_data <- function(data, dummy = NULL) {
@@ -161,9 +167,10 @@ comparing_data <- function(new, old, tol = 0.0001) {
   }
 
   write.table(data, "data/check_procomer.csv",
-            sep = "|",
-            row.names = F,
-            col.names = T)
+    sep = "|",
+    row.names = F,
+    col.names = T
+  )
   return("data/check_procomer.csv")
 }
 
@@ -181,9 +188,10 @@ comparing_data_month <- function(new, old, tol = 0.0001) {
       filter(!check)
 
     write.table(data, "data/check_bccr.csv",
-              sep = "|",
-              row.names = F,
-              col.names = T)
+      sep = "|",
+      row.names = F,
+      col.names = T
+    )
   } else {
     data <- new %>%
       mutate(value_old = value) %>%

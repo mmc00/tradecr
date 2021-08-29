@@ -57,15 +57,19 @@ list(
   ### chapter
   tar_target(
     checking.old.chapter.data,
-    check_if_exist("data/historical_chapter_data_procomer.csv",
-                   c("chapter")),
+    check_if_exist(
+      "data/historical_chapter_data_procomer.csv",
+      c("chapter")
+    ),
     format = "file"
   ),
   ### country
   tar_target(
     checking.old.country.data,
-    check_if_exist("data/historical_country_data_procomer.csv",
-                   c("country")),
+    check_if_exist(
+      "data/historical_country_data_procomer.csv",
+      c("country")
+    ),
     format = "file"
   ),
   ## reading last data
@@ -135,8 +139,10 @@ list(
   ## Check old data
   tar_target(
     checking.old.imp.data,
-    check_if_exist("data/historical_imp_data_bccr.csv",
-                   c("month")),
+    check_if_exist(
+      "data/historical_imp_data_bccr.csv",
+      c("month")
+    ),
     format = "file"
   ),
   ## read old data
