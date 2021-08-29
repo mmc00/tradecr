@@ -20,14 +20,16 @@ with open(file_path_imp) as fp:
 bot = telegram.Bot(token=api_key)
 # send message if file has more than one row  
 if(len(data_read) > 1):
-  text0 = ("There is a problem on Exports" + "/n" + data_read)
+  text0 = ("There is a problem on Exports")
   bot.send_message(chat_id=user_id, text=text0)
+  bot.send_message(chat_id=user_id, text=data_read)
 else:
   bot.send_message(chat_id=user_id, text = "Everything its right with Exports!")
 
 # send message if file has more than one row  
 if(len(data_read_imp) > 1):
-  text1 = ("There is a problem on Imports" + "/n" + data_read_imp)
+  text1 = ("There is a problem on Imports")
   bot.send_message(chat_id=user_id, text=text1)
+  bot.send_message(chat_id=user_id, text=data_read_imp)
 else:
   bot.send_message(chat_id=user_id, text="Everything its right with Imports!")
