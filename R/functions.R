@@ -149,6 +149,63 @@ last_new_data_month <- function(data) {
   return(data)
 }
 
+data_status <- function(new, old, tol = 0.0001) {
+  if (nrow(old) > 0) {
+    data <- full_join(new %>%
+      mutate(year = as.numeric(year)),
+    old %>%
+      mutate(year = as.numeric(year)),
+    by = "year"
+    ) %>%
+      mutate(check = abs(value - value_old) <= tol)
+  } else {
+    data <- new %>%
+      mutate(value_old = value) %>%
+      mutate(check = abs(value - value_old) <= tol)
+  }
+  return(data)
+}
+
+data_status_month <- function(new, old, tol = 0.0001) {
+  if (nrow(old) > 0) {
+    data <- full_join(new %>%
+      mutate(year = as.numeric(year)) %>%
+      mutate(month = as.numeric(month)),
+    old %>%
+      mutate(year = as.numeric(year)) %>%
+      mutate(month = as.numeric(month)),
+    by = c("year", "month")
+    ) %>%
+      mutate(check = abs(value - value_old) <= tol)
+  } else {
+    data <- new %>%
+      mutate(value_old = value) %>%
+      mutate(check = abs(value - value_old) <= tol)
+  }
+  return(data)
+}
+
+writing_status_frame <- function(data, name) {
+  write.table(data, name,
+    sep = "|",
+    row.names = F,
+    col.names = T
+  )
+  return(name)
+}
+
+writing_check_frame <- function(data, name) {
+  data <- data %>%
+    filter(!check)
+
+  write.table(data, name,
+    sep = "|",
+    row.names = F,
+    col.names = T
+  )
+  return(name)
+}
+
 comparing_data <- function(new, old, tol = 0.0001) {
   if (nrow(old) > 0) {
     data <- full_join(new %>%

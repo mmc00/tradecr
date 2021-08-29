@@ -110,9 +110,25 @@ list(
   ## creating compare data.frame
   tar_target(
     compare.agg.data,
-    comparing_data(
+    data_status(
       sort.new.data,
       sort.old.data
+    )
+  ),
+  ## write status data
+  tar_target(
+    write.status,
+    writing_status_frame(
+      compare.agg.data,
+      "data/status_procomer.csv"
+    )
+  ),
+  ## write checks data
+  tar_target(
+    write.check,
+    writing_status_frame(
+      compare.agg.data,
+      "data/check_procomer.csv"
     )
   ),
   # BCCR flow (imports)
@@ -172,9 +188,25 @@ list(
   ),
   tar_target(
     compare.imp.agg.data,
-    comparing_data_month(
+    data_status_month(
       sort.new.imp.data,
       sort.old.imp.data
+    )
+  ),
+  ## write status data
+  tar_target(
+    write.imp.status,
+    writing_status_frame(
+      compare.imp.agg.data,
+      "data/status_bccr.csv"
+    )
+  ),
+  ## write checks data
+  tar_target(
+    write.imp.check,
+    writing_status_frame(
+      compare.imp.agg.data,
+      "data/check_bccr.csv"
     )
   )
 )
