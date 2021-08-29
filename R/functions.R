@@ -21,7 +21,7 @@ long_country_data <- function(patho, dummy) {
     pivot_longer(-country, names_to = "year") %>%
     group_by(country, year) %>%
     summarise(value = sum(value, na.rm = T), .groups = "drop") %>%
-    mutate(time = now())
+    mutate(time = now(tzone = "UTC"))
 
   return(data)
 }
@@ -36,7 +36,7 @@ long_chapter_data <- function(path) {
     pivot_longer(-chapter, names_to = "year") %>%
     group_by(chapter, year) %>%
     summarise(value = sum(value, na.rm = T), .groups = "drop") %>%
-    mutate(time = now())
+    mutate(time = now(tzone = "UTC"))
 
   return(data)
 }
@@ -243,5 +243,5 @@ getting_agg_imports <- function(data, study_month,
       "year" = "id_year",
       "month" = "id_month"
     ) %>%
-    mutate(time = now())
+    mutate(time = now(tzone = "UTC"))
 }
