@@ -209,21 +209,21 @@ jobs:
       #     git merge origin/master
       #     git push -u origin development
 
-      # - name: Melt dev with targets
-      #   run: |
-      #     sudo git fetch --unshallow
-      #     sudo git checkout development
-      #     sudo git pull
-      #     sudo git merge --no-ff targets-runs --strategy-option ours --allow-unrelated-histories
-      #     sudo git push
+      - name: Melt dev with targets
+        run: |
+          sudo git fetch --unshallow
+          sudo git checkout development
+          sudo git pull
+          sudo git merge --no-ff targets-runs --strategy-option ours --allow-unrelated-histories
+          sudo git push
 
-      # - name: Match dev with master
-      #   run: |
-      #     sudo git fetch
-      #     sudo git checkout master
-      #     sudo git pull
-      #     sudo git merge origin/development
-      #     sudo git push -u origin master 
+      - name: Match dev with master
+        run: |
+          sudo git fetch
+          sudo git checkout master
+          sudo git pull
+          sudo git merge origin/development
+          sudo git push -u origin master 
 
       # - name: Prepare failure artifact
       #   if: failure()
