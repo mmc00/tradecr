@@ -126,7 +126,7 @@ list(
   ## write checks data
   tar_target(
     write.check,
-    writing_status_frame(
+    writing_check_frame(
       compare.agg.data,
       "data/check_procomer.csv"
     )
@@ -204,7 +204,7 @@ list(
   ## write checks data
   tar_target(
     write.imp.check,
-    writing_status_frame(
+    writing_check_frame(
       compare.imp.agg.data,
       "data/check_bccr.csv"
     )

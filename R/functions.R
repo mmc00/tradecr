@@ -196,8 +196,7 @@ writing_status_frame <- function(data, name) {
 
 writing_check_frame <- function(data, name) {
   data <- data %>% 
-    mutate(check = !check) %>% 
-    filter(check)
+    filter(!check)
 
   write.table(data, name,
     sep = "|",
