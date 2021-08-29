@@ -3,97 +3,178 @@ library(targets)
 library(tarchetypes)
 library(here)
 
-## setting path
-# if (xfun::is_windows()) {
 here::i_am("_targets.R")
-# } else {
-# here::i_am("tradecr/_targets.R")
-# }
 sapply(list.files(here("R"), full.names = T), source)
 options(tidyverse.quiet = TRUE)
-tar_option_set(packages = c(
-  "tidyverse",
-  "here",
-  "httr",
-  "xml2",
-  "XML",
-  "readxl",
-  "lubridate"
-))
-# debug = "chrome_version") # add packages here
+tar_option_set(
+  packages = c(
+    "tidyverse",
+    "here",
+    "httr",
+    "xml2",
+    "XML",
+    "readxl",
+    "lubridate"
+  ),
+  debug = "sort.old.data"
+) # add packages here
 # params
 download_path <- normalizePath(here("temp"))
 temp_path <- here("temp")
+user_bccr <- Sys.getenv("BCCR_USER")
+pass_bccr <- Sys.getenv("BCCR_PASS")
 # dir.create(temp_path, showWarnings = F)
 # flow
 list(
   # setting main path
-  tar_target(main_path,
-             here::i_am("_targets.R")
+  tar_target(
+    main_path,
+    here::i_am("_targets.R"),
+    cue = tar_cue_force(TRUE)
   ),
-  # path for files
+  # PROCOMER flow (exports)
+  ## path for files
   tar_target(
     temp.condata.path,
-    list.files("temp") %>%
-      str_subset(., "con_data") %>%
-      paste0("temp/", .),
+    getting_temps("temp", "con_data", main_path),
     format = "file"
   ),
   tar_target(
     temp.capdata.path,
-    list.files("temp") %>%
-      str_subset(., "cap_data") %>%
-      paste0("temp/", .),
+    getting_temps("temp", "cap_data", main_path),
     format = "file"
   ),
-  # reshape
+  ## reshape
   tar_target(
     temp.condata.long,
-    long_country_data(temp.condata.path,
-                      main_path)
+    long_country_data(temp.condata.path)
   ),
   tar_target(
     temp.capdata.long,
     long_chapter_data(temp.capdata.path)
   ),
-  # adding to dataset
+  ## check if data exist
+  ### chapter
+  tar_target(
+    checking.old.chapter.data,
+    check_if_exist(
+      "data/historical_chapter_data_procomer.csv",
+      c("chapter")
+    ),
+    format = "file"
+  ),
+  ### country
+  tar_target(
+    checking.old.country.data,
+    check_if_exist(
+      "data/historical_country_data_procomer.csv",
+      c("country")
+    ),
+    format = "file"
+  ),
+  ## reading last data
+  tar_target(
+    old.data,
+    reading_old_data(
+      checking.old.chapter.data,
+    )
+  ),
+  ## adding to dataset
+  ### chapter
   tar_target(
     appending.condata,
     append_data(
       temp.condata.long,
-      "historical_country_data_procomer.csv"
+      checking.old.country.data,
     ),
     format = "file"
   ),
+  ### country
   tar_target(
     appending.capdata,
     append_data(
       temp.capdata.long,
-      "historical_chapter_data_procomer.csv"
+      checking.old.chapter.data
     ),
     format = "file"
   ),
-  # reading last data
-  tar_target(
-    old.data,
-    reading_old_data(
-        "data/historical_chapter_data_procomer.csv",
-        appending.capdata
-      )
-  ),
+  ## sorting data
   tar_target(
     sort.old.data,
-    last_old_data(old.data, appending.capdata)
+    last_old_data(old.data)
   ),
   tar_target(
     sort.new.data,
     last_new_data(temp.capdata.long)
   ),
+  ## creating compare data.frame
   tar_target(
     compare.agg.data,
     comparing_data(
       sort.new.data,
       sort.old.data
+    )
+  ),
+  # BCCR flow (imports)
+  ## getting data
+  tar_target(
+    raw.imp.data,
+    bccr_imp0_api(
+      user = user_bccr,
+      password = pass_bccr,
+      start_date = "01/01/1999",
+      end_date = "21/12/2021"
+    ),
+    cue = tar_cue_force(TRUE)
+  ),
+  ## agregate new data
+  tar_target(
+    newimp.agg.data,
+    getting_agg_imports(raw.imp.data,
+      study_month = 12,
+      study_year = 2021
+    ),
+    cue = tar_cue_force(TRUE)
+  ),
+  ## Check old data
+  tar_target(
+    checking.old.imp.data,
+    check_if_exist(
+      "data/historical_imp_data_bccr.csv",
+      c("month")
+    ),
+    format = "file"
+  ),
+  ## read old data
+  tar_target(
+    old.imp.data,
+    reading_old_data(
+      checking.old.imp.data
+    ),
+  ),
+  ## append data
+  tar_target(
+    appending.impdata,
+    append_data(
+      newimp.agg.data,
+      checking.old.imp.data
+    ),
+    format = "file"
+  ),
+  ## sorting data
+  tar_target(
+    sort.old.imp.data,
+    last_old_data_month(old.imp.data)
+  ),
+  tar_target(
+    sort.new.imp.data,
+    last_new_data_month(newimp.agg.data)
+  ),
+  tar_target(
+    compare.imp.agg.data,
+    comparing_data_month(
+      sort.new.imp.data,
+      sort.old.imp.data
     )
   )
 )
