@@ -82,7 +82,7 @@ reading_old_data <- function(path, dummy) {
 last_old_data <- function(data, dummy = NULL) {
   if (nrow(data) > 0) {
     id_date <- data %>%
-      mutate(time = lubridate::as_date(time)) %>%
+      mutate(time = lubridate::as_date(time, tz = "UTC")) %>%
       mutate(
         id_year = year(time),
         id_month = month(time),
@@ -109,7 +109,7 @@ last_old_data <- function(data, dummy = NULL) {
 last_old_data_month <- function(data, dummy = NULL) {
   if (nrow(data) > 0) {
     id_date <- data %>%
-      mutate(time = lubridate::as_date(time)) %>%
+      mutate(time = lubridate::as_date(time, tz = "UTC")) %>%
       mutate(
         id_year = year(time),
         id_month = month(time),
