@@ -134,6 +134,7 @@ jobs:
       - name: Install Linux system dependencies 4 targets and telegram
         if: runner.os == 'Linux'
         run: |
+          sudo apt update
           sudo apt-get install libcurl4-openssl-dev
           sudo apt-get install libssl-dev
           sudo apt-get install libzmq3-dev
