@@ -1,5 +1,7 @@
 # tradecr <img src='man/figures/logo.jpg' align="right" height="139"/>
 
+![Last run status](https://github.com/mmc00/tradecr/.github/workflows/targets.yaml/badge.svg)
+
 Los datos del comercio internacional de Costa Rica son generados por dos instituciones:
 La Promotora de Comercio Exterior de Costa Rica (PROCOMER) para exportaciones y Banco Central de Costa Rica (BCCR) para importaciones.
 
