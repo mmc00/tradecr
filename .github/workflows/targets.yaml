@@ -29,7 +29,7 @@ on:
   #   types:
       # - completed
   schedule:
-    - cron: '00 09,3 * * *'
+    - cron: '00 15,21 * * *'
   push:
     branches:
       - main
