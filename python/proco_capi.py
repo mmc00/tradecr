@@ -70,6 +70,7 @@ while not apply_ch:
     try:
         apply_ch = WebDriverWait(browser, wait4).until(EC.element_to_be_clickable((By.ID, 'ASPxPivotGrid1_FPWOK_B')))
         apply_ch.click()
+        browser.implicitly_wait(30)
     except:continue
 
 # download
@@ -78,6 +79,7 @@ while not downloadclick:
     try:
         downloadclick = WebDriverWait(browser, wait4).until(EC.element_to_be_clickable((By.ID, 'ASPxRoundPanel3_ImageButton3')))
         downloadclick.click()
+        browser.implicitly_wait(30)
         wait.until(EC.staleness_of(downloadclick))
     except:continue
 ## check if file was donwloaded 
