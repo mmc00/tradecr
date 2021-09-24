@@ -5,7 +5,7 @@ from tabulate import tabulate
 
 # reading temp file
 file_path = os.getenv('CHECK_PATH')
-file_path_imp = os.getenv('CHECK_PATH')
+file_path_imp = os.getenv('CHECK_PATH2')
 api_key = os.getenv('ITRADECRAPI')
 user_id = os.getenv('USER_CALL')
 user_id2 = os.getenv('USER_CALL2')

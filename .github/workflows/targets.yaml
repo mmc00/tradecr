@@ -46,6 +46,7 @@ jobs:
       TEMP_PATH: ./temp
       DRIVER_PATH: /usr/local/bin/
       CHECK_PATH: ./data/check_procomer.csv
+      CHECK_PATH2: ./data/check_bccr.csv
       ITRADECRAPI: ${{ secrets.ITRADECRAPI }}
       USER_CALL: ${{ secrets.MOLINA_TELEGRAM }}
       USER_CALL2: ${{ secrets.KIM_TELEGRAM }}
