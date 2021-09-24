@@ -101,6 +101,7 @@ last_old_data <- function(data, dummy = NULL) {
     data <- data %>%
       mutate(time = lubridate::ymd_hms(time)) %>%
       filter(time %in% id_date) %>%
+      distinct(., .keep_all = T) %>% 
       group_by(year) %>%
       summarise(value_old = sum(value, na.rm = T), .groups = "drop")
   }
@@ -129,6 +130,7 @@ last_old_data_month <- function(data, dummy = NULL) {
     data <- data %>%
       mutate(time = lubridate::ymd_hms(time)) %>%
       filter(time %in% id_date) %>%
+      distinct(., .keep_all = T) %>% 
       group_by(year, month) %>%
       summarise(value_old = sum(value, na.rm = T), .groups = "drop")
   }
