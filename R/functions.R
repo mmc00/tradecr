@@ -82,7 +82,7 @@ reading_old_data <- function(path, dummy) {
 last_old_data <- function(data, dummy = NULL) {
   if (nrow(data) > 0) {
     id_date <- data %>%
-      mutate(time = lubridate::as_date(time, tz = "UTC")) %>%
+      mutate(time = lubridate::ymd_hms(time)) %>%
       mutate(
         id_year = year(time),
         id_month = month(time),
@@ -92,13 +92,14 @@ last_old_data <- function(data, dummy = NULL) {
         id_sec = second(time)
       ) %>%
       arrange(
-        id_year, id_month, id_day,
-        id_hour, id_min, id_sec
+        desc(id_year), desc(id_month), desc(id_day),
+        desc(id_hour), desc(id_min), desc(id_sec)
       ) %>%
       slice(1) %>%
       pull(time)
 
     data <- data %>%
+      mutate(time = lubridate::ymd_hms(time)) %>%
       filter(time %in% id_date) %>%
       group_by(year) %>%
       summarise(value_old = sum(value, na.rm = T), .groups = "drop")
@@ -109,7 +110,7 @@ last_old_data <- function(data, dummy = NULL) {
 last_old_data_month <- function(data, dummy = NULL) {
   if (nrow(data) > 0) {
     id_date <- data %>%
-      mutate(time = lubridate::as_date(time, tz = "UTC")) %>%
+      mutate(time = lubridate::ymd_hms(time)) %>%
       mutate(
         id_year = year(time),
         id_month = month(time),
@@ -119,13 +120,14 @@ last_old_data_month <- function(data, dummy = NULL) {
         id_sec = second(time)
       ) %>%
       arrange(
-        id_year, id_month, id_day,
-        id_hour, id_min, id_sec
+        desc(id_year), desc(id_month), desc(id_day),
+        desc(id_hour), desc(id_min), desc(id_sec)
       ) %>%
       slice(1) %>%
       pull(time)
 
     data <- data %>%
+      mutate(time = lubridate::ymd_hms(time)) %>%
       filter(time %in% id_date) %>%
       group_by(year, month) %>%
       summarise(value_old = sum(value, na.rm = T), .groups = "drop")
@@ -157,6 +159,8 @@ data_status <- function(new, old, tol = 0.001) {
       mutate(year = as.numeric(year)),
     by = "year"
     ) %>%
+      mutate(value = if_else(is.na(value), 0, value)) %>% 
+      mutate(value_old = if_else(is.na(value_old), 0, value_old)) %>% 
       mutate(check = abs(value - value_old) <= tol)
   } else {
     data <- new %>%
@@ -176,6 +180,8 @@ data_status_month <- function(new, old, tol = 0.001) {
       mutate(month = as.numeric(month)),
     by = c("year", "month")
     ) %>%
+      mutate(value = if_else(is.na(value), 0, value)) %>% 
+      mutate(value_old = if_else(is.na(value_old), 0, value_old)) %>% 
       mutate(check = abs(value - value_old) <= tol)
   } else {
     data <- new %>%
