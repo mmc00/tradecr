@@ -31,7 +31,7 @@ long_chapter_data <- function(path) {
   data <- read_excel(path) %>%
     rename("chapter" = "...1") %>%
     filter(chapter != "Grand Total") %>%
-    select(chapter, any_of(paste0(1990:2100))) %>%
+    select(chapter, any_of(paste0(1990:2100)), starts_with(paste0(1990:2100))) %>%
     slice(-1) %>%
     pivot_longer(-chapter, names_to = "year") %>%
     group_by(chapter, year) %>%
