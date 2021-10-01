@@ -156,9 +156,9 @@ last_new_data_month <- function(data) {
 data_status <- function(new, old, tol = 0.001) {
   if (nrow(old) > 0) {
     data <- full_join(new %>%
-      mutate(year = as.numeric(year)),
+      mutate(year = as.character(year)),
     old %>%
-      mutate(year = as.numeric(year)),
+      mutate(year = as.character(year)),
     by = "year"
     ) %>%
       mutate(value = if_else(is.na(value), 0, value)) %>% 
