@@ -23,7 +23,6 @@ download_path <- normalizePath(here("temp"))
 temp_path <- here("temp")
 user_bccr <- Sys.getenv("BCCR_USER")
 pass_bccr <- Sys.getenv("BCCR_PASS")
-# dir.create(temp_path, showWarnings = F)
 # flow
 list(
   # setting main path
