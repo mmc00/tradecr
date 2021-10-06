@@ -15,8 +15,8 @@ tar_option_set(
     "XML",
     "readxl",
     "lubridate"
-  ),
-  debug = "sort.old.data"
+  )
+  # debug = "sort.old.data"
 ) # add packages here
 # params
 download_path <- normalizePath(here("temp"))
