@@ -19,7 +19,7 @@ long_country_data <- function(patho, dummy) {
     select(country, any_of(paste0(1990:2100))) %>%
     slice(-c(1:2)) %>%
     pivot_longer(-country, names_to = "year") %>%
-    group_by(country, year) %>%
+    group_by(year) %>%
     summarise(value = sum(value, na.rm = T), .groups = "drop") %>%
     mutate(time = now(tzone = "UTC"))
 
@@ -100,7 +100,7 @@ last_old_data <- function(data, dummy = NULL) {
       pull(time)
 
     data <- data %>%
-      mutate(value = as.numeric(value)) %>%
+      mutate(value = as.numeric(value)) %>% 
       mutate(time = lubridate::ymd_hms(time)) %>%
       filter(time %in% id_date) %>%
       distinct(., .keep_all = T) %>% 
