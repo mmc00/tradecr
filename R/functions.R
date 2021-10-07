@@ -82,6 +82,7 @@ reading_old_data <- function(path, dummy) {
 last_old_data <- function(data, dummy = NULL) {
   if (nrow(data) > 0) {
     id_date <- data %>%
+      mutate(value = as.numeric(value)) %>% 
       mutate(time = lubridate::ymd_hms(time)) %>%
       mutate(
         id_year = year(time),
@@ -99,6 +100,7 @@ last_old_data <- function(data, dummy = NULL) {
       pull(time)
 
     data <- data %>%
+      mutate(value = as.numeric(value)) %>%
       mutate(time = lubridate::ymd_hms(time)) %>%
       filter(time %in% id_date) %>%
       distinct(., .keep_all = T) %>% 
@@ -111,6 +113,7 @@ last_old_data <- function(data, dummy = NULL) {
 last_old_data_month <- function(data, dummy = NULL) {
   if (nrow(data) > 0) {
     id_date <- data %>%
+      mutate(value = as.numeric(value)) %>% 
       mutate(time = lubridate::ymd_hms(time)) %>%
       mutate(
         id_year = year(time),
@@ -128,6 +131,7 @@ last_old_data_month <- function(data, dummy = NULL) {
       pull(time)
 
     data <- data %>%
+      mutate(value = as.numeric(value)) %>% 
       mutate(time = lubridate::ymd_hms(time)) %>%
       filter(time %in% id_date) %>%
       distinct(., .keep_all = T) %>% 
