@@ -1,36 +1,19 @@
 .targets-runs/
 _targets/meta/process
 _targets/meta/progress
-<<<<<<< HEAD
-data/historical_country_data_procomer.csv
-<<<<<<< HEAD
-temp/cap_data_2021_10_05__22_58_45.xls
-temp/con_data_2021_10_05__22_58_06.xls
-=======
-temp/cap_data_2021_10_05__23_13_59.xls
-temp/con_data_2021_10_05__23_13_20.xls
->>>>>>> targets-runs
-=======
-temp/cap_data_2021_10_05__23_57_03.xls
-temp/con_data_2021_10_05__23_56_23.xls
->>>>>>> targets-runs
+temp/cap_data_2021_10_07__21_17_06.xls
+temp/con_data_2021_10_07__21_16_27.xls
 .targets-files
 _targets/meta/meta
+_targets/objects/compare.agg.data
 _targets/objects/newimp.agg.data
 _targets/objects/old.data
 _targets/objects/old.imp.data
+_targets/objects/sort.new.data
+_targets/objects/temp.capdata.long
+_targets/objects/temp.condata.long
 data/historical_chapter_data_procomer.csv
 data/historical_country_data_procomer.csv
 data/historical_imp_data_bccr.csv
-<<<<<<< HEAD
 temp/cap_data_2021_10_05__22_41_14.xls
 temp/con_data_2021_10_05__22_40_35.xls
-=======
-temp/cap_data_2021_10_05__22_58_45.xls
-temp/cap_data_2021_10_05__23_13_59.xls
-temp/con_data_2021_10_05__22_58_06.xls
-<<<<<<< HEAD
->>>>>>> targets-runs
-=======
-temp/con_data_2021_10_05__23_13_20.xls
->>>>>>> targets-runs
