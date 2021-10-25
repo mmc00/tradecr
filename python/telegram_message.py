@@ -9,8 +9,10 @@ file_path_imp = os.getenv('CHECK_PATH2')
 api_key = os.getenv('ITRADECRAPI')
 user_id = os.getenv('USER_CALL')
 user_id2 = os.getenv('USER_CALL2')
+user_id3 = os.getenv('USER_CALL3')
+user_id4 = os.getenv('USER_CALL4')
 
-user_ids = [user_id, user_id2]
+user_ids = [user_id, user_id2, user_id3, user_id4]
 
 with open(file_path) as fp:
     reader = csv.reader(fp, delimiter=",", quotechar='"')
