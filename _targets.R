@@ -139,7 +139,7 @@ list(
       user = user_bccr,
       password = pass_bccr,
       start_date = "01/01/1999",
-      end_date = "21/12/2021"
+      end_date = "21/12/2022"
     ),
     cue = tar_cue_force(TRUE)
   ),
@@ -148,7 +148,7 @@ list(
     newimp.agg.data,
     getting_agg_imports(raw.imp.data,
       study_month = 12,
-      study_year = 2021
+      study_year = 2022
     ),
     cue = tar_cue_force(TRUE)
   ),
