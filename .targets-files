@@ -2,12 +2,13 @@
 _targets/meta/process
 _targets/meta/progress
 data/historical_chapter_data_procomer.csv
-temp/cap_data_2022_04_03__21_06_48.xls
-temp/con_data_2022_04_03__21_06_10.xls
+temp/cap_data_2022_04_04__21_06_44.xls
+temp/con_data_2022_04_04__21_06_04.xls
 .targets-files
 _targets/meta/meta
 _targets/objects/compare.agg.data
 _targets/objects/compare.imp.agg.data
+_targets/objects/main_path
 _targets/objects/newimp.agg.data
 _targets/objects/old.data
 _targets/objects/old.imp.data
@@ -18,6 +19,10 @@ _targets/objects/sort.old.data
 _targets/objects/sort.old.imp.data
 _targets/objects/temp.capdata.long
 _targets/objects/temp.condata.long
+_targets/objects/write.check
+_targets/objects/write.imp.check
+_targets/objects/write.imp.status
+_targets/objects/write.status
 data/historical_country_data_procomer.csv
 data/historical_imp_data_bccr.csv
 data/status_bccr.csv
