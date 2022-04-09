@@ -216,6 +216,7 @@ jobs:
           sudo git fetch --unshallow
           sudo git checkout development
           sudo git pull
+          sudo git add data/historical_chapter_data_procomer.csv
           sudo git merge --no-ff targets-runs --strategy-option ours --allow-unrelated-histories
           sudo git push
       - name: Match dev with master
