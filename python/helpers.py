@@ -6,6 +6,9 @@ from selenium.common.exceptions import WebDriverException
 import time
 import os
 
+# source
+## https://stackoverflow.com/questions/45653801/selenium-wait-for-element-to-be-clickable-not-working
+
 ## custom function for waiting to be clickable
 def wait_for_element_to_be_clickable(browser, selector, timeout=10):
     wd_wait = WebDriverWait(browser, timeout)
