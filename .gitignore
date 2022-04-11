@@ -1,6 +1,2 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-_targets/objects/
-python/.env
+
+python/.env/*
