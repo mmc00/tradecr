@@ -142,6 +142,7 @@ jobs:
           sudo apt-get install libzmq3-dev
           sudo pip install python-telegram-bot
           sudo pip install tabulate
+          sudo apt-get install libxml2-dev
       - name: Cache packages
         uses: actions/cache@v2
         with:
