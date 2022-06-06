@@ -95,7 +95,7 @@ jobs:
         run: |
           sudo python -m pip install --upgrade pip
           sudo pip install selenium
-          sudo pip install requests
+          sudo pip install --upgrade requests
       - name: Restore output files from the previous run
         if: steps.runs-exist.outcome == 'success'
         run: |
