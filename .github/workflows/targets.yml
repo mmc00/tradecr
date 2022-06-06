@@ -154,6 +154,7 @@ jobs:
         shell: sudo -E Rscript {0}
         run: |
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          options(renv.config.install.transactional=FALSE)
           renv::restore()
       - name: List files 1
         run:
