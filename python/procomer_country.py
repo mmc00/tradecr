@@ -1,6 +1,7 @@
 # coding=utf-8
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 import os
 
 # enviroment vars
@@ -19,9 +20,10 @@ options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--disable-gpu")
 options.add_argument("--disable-notifications")
 options.add_experimental_option("useAutomationExtension", False)
+ser = Service(driver_path)
 
 # driver call
-browser = webdriver.Chrome(driver_path, options=options)
+browser = webdriver.Chrome(service=ser, options=options)
 
 # parameters dict
 ## for wait element call
