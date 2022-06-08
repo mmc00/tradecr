@@ -16,12 +16,12 @@ def write_hist_exp(path, limit=40, file2write=None):
         file = pd.concat([data_con_hist, data_con_long])
     else:
         file = data_con_long
-    path2hist = Path.cwd().parent.joinpath("data", file2write)
+    path2hist = Path.cwd().joinpath("data", file2write)
     file.to_csv(path2hist, sep="|", index=False)
 
 
 # cheking files
-path = Path.cwd().parent.joinpath("temp")
+path = Path.cwd().joinpath("temp")
 path_con = [e for e in os.listdir(path) if e.startswith("con_data")][0]
 path_chp = [e for e in os.listdir(path) if e.startswith("cap_data")][0]
 print([path_con, path_chp])
@@ -47,12 +47,12 @@ data_chp_raw = data_chp_raw.drop(columns=cols2drop_chp, axis=0)
 ## to long
 ### country data
 data_con_long = pd.melt(data_con_raw, id_vars="country", var_name="year")
-data_con_long.loc[:, "value"] = data_con_long["value"].replace({"NaN": np.nan})
-data_con_long = data_con_long.query("value.notna()").copy(deep=True)
+data_con_long.loc[:, "value"] = data_con_long.loc[:, "value"].replace({"NaN": np.nan})
+data_con_long = data_con_long.query("value == value").copy(deep=True)
 ### chapter data
 data_chp_long = pd.melt(data_chp_raw, id_vars="chapter", var_name="year")
-data_chp_long.loc[:, "value"] = data_chp_long["value"].replace({"NaN": np.nan})
-data_chp_long = data_chp_long.query("value.notna()").copy(deep=True)
+data_chp_long.loc[:, "value"] = data_chp_long.loc[:, "value"].replace({"NaN": np.nan})
+data_chp_long = data_chp_long.query("value == value").copy(deep=True)
 
 ## fixing countries names
 data_con_long.loc[:, "country"] = data_con_long.loc[:, "country"].replace(
@@ -75,9 +75,7 @@ data_con_new.index = data_con_new.index.astype("str").str.strip()
 # reading historical data
 
 ## load
-path_con_hist = Path.cwd().parent.joinpath(
-    "data", "historical_country_data_procomer.csv"
-)
+path_con_hist = Path.cwd().joinpath("data", "historical_country_data_procomer.csv")
 data_con_hist = pd.read_csv(path_con_hist, delimiter="|")
 
 ## filter and group data
@@ -99,11 +97,12 @@ con_check = con_join.query("~ check")
 
 # results
 ## status and check files
-path_con_status = Path.cwd().parent.joinpath("data", "status_procomer.csv")
-path_con_check = Path.cwd().parent.joinpath("data", "check_procomer.csv")
+path_con_status = Path.cwd().joinpath("data", "status_procomer.csv")
+path_con_check = Path.cwd().joinpath("data", "check_procomer.csv")
 con_status.to_csv(path_con_status, sep="|", index=False)
 con_check.to_csv(path_con_check, sep="|", index=False)
 ## historical data
 write_hist_exp(
     path=path_con_hist, limit=limitmb, file2write="historical_country_data_procomer.csv"
 )
+print("End of exports flow")
