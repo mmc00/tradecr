@@ -47,7 +47,7 @@ try:
 except requests.exceptions.Timeout as e:
     raise SystemExit(e)
 # Maybe set up for a retry, or continue in a retry loop
-except requests.exceptions.TooManyRedirects:
+except requests.exceptions.TooManyRedirects as e:
     raise SystemExit(e)
 # Tell the user their URL was bad and try a different one
 except requests.exceptions.RequestException as e:
