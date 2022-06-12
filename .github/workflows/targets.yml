@@ -25,12 +25,15 @@ jobs:
       USER_CALL2: ${{ secrets.KIM_TELEGRAM }}
       USER_CALL3: ${{ secrets.NINA_TELEGRAM }}
     steps:
+      - uses: browser-actions/setup-chrome@latest
+      - name: Set up Chrome
+        run: chrome --version
 
-      - name: Set up chrome
-        run: |
-          sudo apt-get update &&
-          wget "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" -P /tmp &&
-          apt-get install -y "/tmp/google-chrome-stable_current_amd64.deb" -f
+      # - name: Set up chrome
+      #   run: |
+      #     sudo apt-get update &&
+      #     wget "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" -P /tmp &&
+      #     apt-get install -y "/tmp/google-chrome-stable_current_amd64.deb" -f
 
       - name: Chrome driver
         run: |
