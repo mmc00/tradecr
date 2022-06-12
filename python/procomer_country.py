@@ -19,6 +19,7 @@ options.add_argument("--headless")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--disable-gpu")
 options.add_argument("--disable-notifications")
+ser = Service(driver_path)
 options.add_experimental_option("useAutomationExtension", False)
 ser = Service(driver_path)
 
