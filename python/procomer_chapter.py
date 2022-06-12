@@ -21,6 +21,7 @@ options.add_argument("--disable-gpu")
 options.add_argument("--disable-notifications")
 ser = Service(driver_path)
 options.add_experimental_option("useAutomationExtension", False)
+ser = Service(driver_path)
 
 # driver call
 browser = webdriver.Chrome(service=ser, options=options)

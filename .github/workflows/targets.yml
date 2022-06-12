@@ -70,6 +70,7 @@ jobs:
 
       - name: Setting python
         run: |
+<<<<<<< HEAD
           sudo apt-get update
           sudo apt-get -y install python3-pip
           sudo pip3 install selenium==4.0.0.a3
@@ -78,6 +79,21 @@ jobs:
           sudo pip3 install --upgrade requests
           sudo pip3 install xlrd==2.0.1
 
+=======
+          sudo python -m pip install --upgrade pip
+          sudo pip install selenium
+          sudo pip install --upgrade requests
+      - name: Restore output files from the previous run
+        if: steps.runs-exist.outcome == 'success'
+        run: |
+          for (dest in scan(".targets-runs/.targets-files", what = character())) {
+            source <- file.path(".targets-runs", dest)
+            if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
+            if (file.exists(source)) file.rename(source, dest)
+          }
+        shell: sudo Rscript {0}
+      
+>>>>>>> 081552fe56c80d30b26e4536e22defa2abc06db5
       - name: Setting up for temp and data folder
         run:
           sudo rm -rf ${TEMP_PATH} \
@@ -109,8 +125,45 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update
+<<<<<<< HEAD
           sudo pip3 install python-telegram-bot
           sudo pip3 install tabulate
+=======
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libssl-dev
+          sudo apt-get install libzmq3-dev
+          sudo pip install python-telegram-bot
+          sudo pip install tabulate
+          sudo apt-get install libxml2-dev
+      - name: Cache packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: ${{ runner.os }}-renv-
+
+      - name: Restore packages
+        shell: sudo -E Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          options(renv.config.install.transactional=FALSE)
+          renv::restore()
+      - name: List files 1
+        run:
+          sudo ls -l ${TEMP_PATH}
+        env: 
+          TEMP_PATH: ./temp
+        
+      - name: List files 2
+        run:
+          sudo ls -l ${TEMP_PATH}
+        env: 
+          TEMP_PATH: ./temp
+      
+      - name: Run targets pipeline
+        run: targets::tar_make()
+        shell: sudo -E Rscript {0} 
+>>>>>>> 081552fe56c80d30b26e4536e22defa2abc06db5
 
       - name: Running export pipeline
         run: 
