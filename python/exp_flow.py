@@ -47,11 +47,13 @@ data_chp_raw = data_chp_raw.drop(columns=cols2drop_chp, axis=0)
 ## to long
 ### country data
 data_con_long = pd.melt(data_con_raw, id_vars="country", var_name="year")
-data_con_long.loc[:, "value"] = data_con_long.loc[:, "value"].replace({"NaN": np.nan})
+# data_con_long.loc[:, "value"] = data_con_long.loc[:, "value"].replace({"NaN": np.nan})
+data_con_long.loc[:, "value"] = pd.to_numeric(data_con_long.loc[:, "value"], errors="coerce")
 data_con_long = data_con_long.query("value == value").copy(deep=True)
 ### chapter data
 data_chp_long = pd.melt(data_chp_raw, id_vars="chapter", var_name="year")
-data_chp_long.loc[:, "value"] = data_chp_long.loc[:, "value"].replace({"NaN": np.nan})
+# data_chp_long.loc[:, "value"] = data_chp_long.loc[:, "value"].replace({"NaN": np.nan})
+data_chp_long.loc[:, "value"] = pd.to_numeric(data_chp_long.loc[:, "value"], errors="coerce")
 data_chp_long = data_chp_long.query("value == value").copy(deep=True)
 
 ## fixing countries names
