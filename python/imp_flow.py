@@ -84,14 +84,14 @@ path_imp_hist = Path.cwd().joinpath("data", "historical_imp_data_bccr.csv")
 data_imp_hist = pd.read_csv(path_imp_hist, sep="|")
 data_imp_hist.loc[:, "time"] = pd.to_datetime(data_imp_hist.loc[:, "time"])
 data_imp_hist.loc[:, "year"] = data_imp_hist.loc[:, "year"].astype("str").str.strip()
-data_imp_hist.loc[:, "year"] = data_imp_hist.loc[:, "year"].replace({"NaN": np.nan})
-data_imp_hist.loc[:, "year"] = data_imp_hist.loc[:, "year"].replace({"nan": np.nan})
+# data_imp_hist.loc[:, "year"] = data_imp_hist.loc[:, "year"].replace({"NaN": np.nan})
+# data_imp_hist.loc[:, "year"] = data_imp_hist.loc[:, "year"].replace({"nan": np.nan})
 data_imp_hist.loc[:, "year"] = pd.to_numeric(
-    data_imp_hist.loc[:, "year"], downcast="integer"
+    data_imp_hist.loc[:, "year"], errors='coerce', downcast="integer"
 )
 data_imp_hist.loc[:, "year"] = round(data_imp_hist.loc[:, "year"], 0)
-data_imp_hist.loc[:, "value"] = data_imp_hist.loc[:, "value"].replace({"NaN": np.nan})
-data_imp_hist.loc[:, "value"] = data_imp_hist.loc[:, "value"].replace({"nan": np.nan})
+# data_imp_hist.loc[:, "value"] = data_imp_hist.loc[:, "value"].replace({"NaN": np.nan})
+# data_imp_hist.loc[:, "value"] = data_imp_hist.loc[:, "value"].replace({"nan": np.nan})
 data_imp_hist.loc[:, "value"] = pd.to_numeric(
     data_imp_hist.loc[:, "value"], errors="coerce"
 )
