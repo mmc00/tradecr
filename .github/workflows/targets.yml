@@ -94,7 +94,7 @@ jobs:
       
       - name: Python Procomer by country
         run: 
-          sudo -E python ./python/procomer_country.py \
+          sudo -E python ./python/procomer_country.py
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
