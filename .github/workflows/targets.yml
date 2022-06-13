@@ -75,11 +75,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get -y install python3-pip
-          pip3 install selenium==4.0.0.a3
-          pip3 install pandas==1.1.5
-          pip3 install numpy==1.19.5
-          pip3 install --upgrade requests
-          pip3 install xlrd==2.0.1
+          sudo pip3 install selenium==4.0.0.a3
+          sudo pip3 install pandas==1.1.5
+          sudo pip3 install numpy==1.19.5
+          sudo pip3 install --upgrade requests
+          sudo pip3 install xlrd==2.0.1
 
       - name: Setting up for temp and data folder
         run:
@@ -94,7 +94,7 @@ jobs:
       
       - name: Python Procomer by country
         run: 
-          python ./python/procomer_country.py \
+          sudo -E python ./python/procomer_country.py \
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
