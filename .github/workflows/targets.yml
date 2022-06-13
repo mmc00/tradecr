@@ -58,18 +58,18 @@ jobs:
         with:
           python-version: '3.9.12'
 
-      # - name: Check if previous runs exists
-      #   id: runs-exist
-      #   run: sudo git ls-remote --exit-code --heads origin targets-runs
-      #   continue-on-error: true
+      - name: Check if previous runs exists
+        id: runs-exist
+        run: sudo git ls-remote --exit-code --heads origin targets-runs
+        continue-on-error: true
 
-      # - name: Checkout previous run
-      #   if: steps.runs-exist.outcome == 'success'
-      #   uses: actions/checkout@v2
-      #   with:
-      #     ref: targets-runs
-      #     fetch-depth: 1
-      #     path: .targets-runs
+      - name: Checkout previous run
+        if: steps.runs-exist.outcome == 'success'
+        uses: actions/checkout@v2
+        with:
+          ref: targets-runs
+          fetch-depth: 1
+          path: .targets-runs
 
       - name: Setting python
         run: |
@@ -126,3 +126,47 @@ jobs:
       - name: Run bot
         run: 
           sudo -E python3 ./python/telegram_message.py
+
+      - name: Identify files that the targets pipeline produced
+        run:
+          sudo git ls-files -mo > .targets-files
+
+      - name: Create the runs branch if it does not already exist
+        if: steps.runs-exist.outcome != 'success'
+        run: sudo git checkout --orphan targets-runs
+
+      - name: Put the worktree in the runs branch if the latter already exists
+        if: steps.runs-exist.outcome == 'success'
+        run: |
+          sudo -E rm -r .git
+          sudo -E mv .targets-runs/.git .
+          sudo -E rm -r .targets-runs
+      
+      - name: View files
+        run: sudo cat .targets-files
+
+      - name: Upload latest run
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          rm -r .gitignore .github/workflows
+          git add --all -- ':!renv'
+          git status
+          git commit -am "Run pipeline"
+          git push origin targets-runs
+
+      - name: Melt development with targets
+        run: |
+          sudo git fetch --unshallow
+          sudo git checkout development
+          sudo git pull
+          sudo git merge --no-ff targets-runs --strategy-option ours --allow-unrelated-histories
+          sudo git push
+      
+      - name: Match development with master
+        run: |
+          sudo git fetch
+          sudo git checkout master
+          sudo git pull
+          sudo git merge origin/development
+          sudo git push -u origin master 
