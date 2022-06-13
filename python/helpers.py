@@ -71,6 +71,7 @@ def download_wait(directory, timeout, nfiles=None):
         time.sleep(1)
         dl_wait = False
         files = os.listdir(directory)
+        print(files)
         if nfiles and len(files) != nfiles:
             dl_wait = True
 
