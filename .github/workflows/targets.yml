@@ -168,5 +168,5 @@ jobs:
           sudo git fetch
           sudo git checkout master
           sudo git pull
-          sudo git merge origin/development
+          sudo git merge -s ours origin/development
           sudo git push -u origin master 
