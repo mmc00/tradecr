@@ -94,14 +94,15 @@ jobs:
       
       - name: Python Procomer by country
         run: 
-          sudo -E python3 ./python/procomer_country.py
+          sudo -E python3 ./python/procomer_country.py \
+          && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/con_data_`date '+%Y_%m_%d__%H_%M_%S'`.xls
         env:
           TEMP_PATH: ./temp
           DRIVER_PATH: /usr/local/bin/chromedriver
 
       - name: Python Procomer by chapter
         run: 
-          sudo -E python ./python/procomer_chapter.py \
+          sudo -E python3 ./python/procomer_chapter.py \
           && sudo -E mv ${TEMP_PATH}/PivotGrid.xls ${TEMP_PATH}/cap_data_`date '+%Y_%m_%d__%H_%M_%S'`.xls
         env:
           TEMP_PATH: ./temp
@@ -116,12 +117,12 @@ jobs:
 
       - name: Running export pipeline
         run: 
-          sudo -E python ./python/exp_flow.py
+          sudo -E python3 ./python/exp_flow.py
 
       - name: Running import pipeline
         run: 
-          sudo -E python ./python/imp_flow.py
+          sudo -E python3 ./python/imp_flow.py
 
       - name: Run bot
         run: 
-          sudo -E python ./python/telegram_message.py
+          sudo -E python3 ./python/telegram_message.py
