@@ -167,6 +167,9 @@ jobs:
         run: |
           sudo git fetch
           sudo git checkout master
-          sudo git pull
-          sudo git merge -X theirs origin/development
-          sudo git push -u origin master 
+          sudo git merge -s ours origin/development
+          sudo git checkout --detach origin/development
+          sudo git reset --soft master
+          sudo git checkout master
+          sudo git commit --amend -C HEAD
+          sudo push -u origin master 
