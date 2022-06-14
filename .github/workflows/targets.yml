@@ -172,4 +172,4 @@ jobs:
           sudo git reset --soft master
           sudo git checkout master
           sudo git commit --amend -C HEAD
-          sudo push -u origin master 
+          sudo git push -u origin master 
