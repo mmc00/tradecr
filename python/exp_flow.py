@@ -48,12 +48,16 @@ data_chp_raw = data_chp_raw.drop(columns=cols2drop_chp, axis=0)
 ### country data
 data_con_long = pd.melt(data_con_raw, id_vars="country", var_name="year")
 # data_con_long.loc[:, "value"] = data_con_long.loc[:, "value"].replace({"NaN": np.nan})
-data_con_long.loc[:, "value"] = pd.to_numeric(data_con_long.loc[:, "value"], errors="coerce")
+data_con_long.loc[:, "value"] = pd.to_numeric(
+    data_con_long.loc[:, "value"], errors="coerce"
+)
 data_con_long = data_con_long.query("value == value").copy(deep=True)
 ### chapter data
 data_chp_long = pd.melt(data_chp_raw, id_vars="chapter", var_name="year")
 # data_chp_long.loc[:, "value"] = data_chp_long.loc[:, "value"].replace({"NaN": np.nan})
-data_chp_long.loc[:, "value"] = pd.to_numeric(data_chp_long.loc[:, "value"], errors="coerce")
+data_chp_long.loc[:, "value"] = pd.to_numeric(
+    data_chp_long.loc[:, "value"], errors="coerce"
+)
 data_chp_long = data_chp_long.query("value == value").copy(deep=True)
 
 ## fixing countries names
@@ -64,10 +68,12 @@ data_con_long = data_con_long.query("country != 'Grand Total'").copy(deep=True)
 data_chp_long = data_chp_long.query("chapter != 'Grand Total'").copy(deep=True)
 
 ## adding current time
+### current time
+now_var = dt.datetime.now()
 ### country data
-data_con_long.loc[:, "time"] = dt.datetime.now()
+data_con_long.loc[:, "time"] = now_var
 ### chapter data
-data_chp_long.loc[:, "time"] = dt.datetime.now()
+data_chp_long.loc[:, "time"] = now_var
 
 ## group data
 data_con_new = data_con_long.groupby(["year"]).agg({"value": np.sum})
