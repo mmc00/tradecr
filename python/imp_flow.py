@@ -70,7 +70,8 @@ raw_df.loc[:, "month"] = raw_df.date.dt.month
 ## filtering data
 current_year = dt.datetime.now().year
 agg_imp = raw_df.query("month == 12 | year == @current_year").copy(deep=True)
-agg_imp.loc[:, "date"] = dt.datetime.now()
+now_var = dt.datetime.now()
+agg_imp.loc[:, "date"] = now_var
 ## aggregate data
 new_data = agg_imp.groupby(["year", "month"]).agg({"value": np.sum})
 new_data = new_data.reset_index()
@@ -87,7 +88,7 @@ data_imp_hist.loc[:, "year"] = data_imp_hist.loc[:, "year"].astype("str").str.st
 # data_imp_hist.loc[:, "year"] = data_imp_hist.loc[:, "year"].replace({"NaN": np.nan})
 # data_imp_hist.loc[:, "year"] = data_imp_hist.loc[:, "year"].replace({"nan": np.nan})
 data_imp_hist.loc[:, "year"] = pd.to_numeric(
-    data_imp_hist.loc[:, "year"], errors='coerce', downcast="integer"
+    data_imp_hist.loc[:, "year"], errors="coerce", downcast="integer"
 )
 data_imp_hist.loc[:, "year"] = round(data_imp_hist.loc[:, "year"], 0)
 # data_imp_hist.loc[:, "value"] = data_imp_hist.loc[:, "value"].replace({"NaN": np.nan})
