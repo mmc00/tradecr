@@ -87,7 +87,7 @@ path_con_hist = Path.cwd().joinpath("data", "historical_country_data_procomer.cs
 data_con_hist = pd.read_csv(path_con_hist, delimiter="|")
 
 ## filter and group data
-last_time = data_con_hist["time"].min()
+last_time = data_con_hist["time"].max()
 data_con_old = data_con_hist.query("time == @last_time")
 data_con_old = data_con_old.groupby(["year"]).agg({"value": np.sum})
 data_con_old = data_con_old.rename(columns={"value": "old"})
