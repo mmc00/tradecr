@@ -97,7 +97,7 @@ data_imp_hist.loc[:, "value"] = pd.to_numeric(
     data_imp_hist.loc[:, "value"], errors="coerce"
 )
 ## last rows by date
-last_time = data_imp_hist["time"].max()
+last_time = data_imp_hist["time"].min()
 ## aggregate data and filter
 data_imp_hist = data_imp_hist.query("time == @last_time").copy(deep=True)
 data_impagg_hist = data_imp_hist.groupby(["year", "month"]).agg({"value": np.sum})
