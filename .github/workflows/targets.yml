@@ -159,3 +159,11 @@ jobs:
           sudo git pull
           sudo git merge --no-ff targets-runs --strategy-option ours --allow-unrelated-histories
           sudo git push
+
+      - name: Melt master with targets
+        run: |
+          sudo git fetch --unshallow
+          sudo git checkout master
+          sudo git pull
+          sudo git merge --no-ff targets-runs --strategy-option ours --allow-unrelated-histories
+          sudo git push
