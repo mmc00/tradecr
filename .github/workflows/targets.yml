@@ -152,7 +152,7 @@ jobs:
           git commit -am "Run pipeline"
           git push origin targets-runs
           
-      - name: Melt development with targets
+      - name: Melt development with targets-runs
         run: |
           sudo git fetch --unshallow
           sudo git checkout development
@@ -160,7 +160,7 @@ jobs:
           sudo git merge --no-ff targets-runs --strategy-option ours --allow-unrelated-histories
           sudo git push
 
-      - name: Melt master with targets
+      - name: Melt master with targets-runs
         run: |
           sudo git checkout master
           sudo git pull
