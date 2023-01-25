@@ -1,10 +1,9 @@
 .targets-runs/
-temp/cap_data_2023_01_24__21_06_15.xls
-temp/con_data_2023_01_24__21_05_34.xls
+temp/cap_data_2023_01_25__15_06_45.xls
+temp/con_data_2023_01_25__15_06_04.xls
 .targets-files
 data/historical_country_data_procomer.csv
 data/historical_imp_data_bccr.csv
-data/status_bccr.csv
 python/__pycache__/helpers.cpython-36.pyc
-temp/cap_data_2023_01_24__15_06_16.xls
-temp/con_data_2023_01_24__15_05_36.xls
+temp/cap_data_2023_01_24__21_06_15.xls
+temp/con_data_2023_01_24__21_05_34.xls
